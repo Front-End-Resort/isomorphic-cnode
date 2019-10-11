@@ -11,3 +11,5 @@ build
 npm-debug.log
 
 _site
+
+package-lock.json
