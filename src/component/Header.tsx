@@ -3,8 +3,23 @@ import classnames from "classnames";
 import { Link } from "react-imvc/component";
 import connect from 'react-imvc/hoc/connect'
 import Menu from "./Menu";
+import { number } from "prop-types";
 
-const withData = connect(({ state, handlers }) => {
+export type WithDataProps = {
+  state: {
+    fixedHeader: boolean,
+    showMenu: boolean,
+    pageTitle: boolean,
+    messageCount: number,
+    showAddButton: boolean
+  },
+  handlers: {
+    handleCloseMenu: Function
+    handleOpenMenu: Function
+  }
+}
+
+const withData = connect(({ state, handlers }: WithDataProps) => {
   return {
     fixedHeader: state.fixedHeader,
     showMenu: state.showMenu,
@@ -18,7 +33,17 @@ const withData = connect(({ state, handlers }) => {
 
 export default withData(Header)
 
-function Header(props) {
+export type HeaderProps = {
+  fixedHeader: boolean,
+  showMenu: boolean,
+  pageTitle: boolean,
+  messageCount: number,
+  showAddButton: boolean,
+  onCloseMenu: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void,
+  onOpenMenu: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void
+}
+
+function Header(props: HeaderProps) {
   let {
     showMenu,
     fixedHeader,
@@ -49,21 +74,36 @@ function Header(props) {
   );
 }
 
-function PageCover(props) {
+export type PageCoverProps = {
+  if: boolean,
+  onClick: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void
+}
+
+function PageCover(props: PageCoverProps) {
   if (!props.if) {
     return null;
   }
   return <div className="page-cover" onClick={props.onClick} />;
 }
 
-function Toolbar(props) {
+export type ToolbarProps = {
+  if: boolean,
+  onClick: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void
+}
+
+function Toolbar(props: ToolbarProps) {
   if (!props.if) {
     return null;
   }
   return <div className="toolbar-nav" onClick={props.onClick} />;
 }
 
-function Message({ messageCount, showAddButton }) {
+export type MessageProps = {
+  messageCount: number,
+  showAddButton: boolean
+}
+
+function Message({ messageCount, showAddButton }: MessageProps) {
   if (messageCount > 0) {
     return <i className="num">{messageCount}</i>;
   }

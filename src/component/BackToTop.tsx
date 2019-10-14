@@ -1,6 +1,10 @@
 import React from "react";
 
-export default class BackToTop extends React.Component {
+export type State = {
+  shouldShow: boolean
+}
+
+export default class BackToTop extends React.Component<State> {
   state = {
     shouldShow: false
   };
