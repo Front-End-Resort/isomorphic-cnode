@@ -2,7 +2,25 @@ import React from "react";
 import { Link } from "react-imvc/component";
 import connect from 'react-imvc/hoc/connect'
 
-const withData = connect(({ state, handlers }) => {
+export type WithDataProps = {
+  state: {
+    location: {
+      pattern: string,
+      raw: string
+    },
+    userInfo: {
+      loginname: string
+    },
+    user: {
+      loginname: string
+    }
+  },
+  handlers: {
+    handleLogout: (event: React.MouseEvent<HTMLLIElement, MouseEvent>) => void
+  }
+}
+
+const withData = connect(({ state, handlers }: WithDataProps) => {
   return {
     location: state.location,
     userInfo: state.userInfo,
@@ -12,6 +30,20 @@ const withData = connect(({ state, handlers }) => {
 })
 
 export default withData(UserInfo)
+
+export type UserInfoProps = {
+  location: {
+    pattern: string,
+    raw: string
+  },
+  userInfo: {
+    loginname: string
+  },
+  user: {
+    loginname: string
+  },
+  onLogout: (event: React.MouseEvent<HTMLLIElement, MouseEvent>) => void
+}
 
 function UserInfo({ location, userInfo, user, onLogout }) {
   let showLogout =
@@ -28,7 +60,12 @@ function UserInfo({ location, userInfo, user, onLogout }) {
   );
 }
 
-function Login(props) {
+export type LoginProps = {
+  if: boolean,
+  redirect: string
+}
+
+function Login(props: LoginProps) {
   if (!props.if) {
     return null;
   }
@@ -42,7 +79,12 @@ function Login(props) {
   );
 }
 
-function Logout(props) {
+export type LogoutProps = {
+  if: boolean,
+  onLogout: (event: React.MouseEvent<HTMLLIElement, MouseEvent>) => void
+}
+
+function Logout(props: LogoutProps) {
   if (!props.if) {
     return null;
   }
@@ -56,7 +98,15 @@ function Logout(props) {
   );
 }
 
-function User(props) {
+export type UserProps = {
+  if: boolean
+  info: {
+    loginname: string,
+    avatar_url: string
+  }
+}
+
+function User(props: UserProps) {
   if (!props.if) {
     return null;
   }

@@ -1,7 +1,13 @@
 import React from "react";
 import connect from 'react-imvc/hoc/connect'
 
-const withData = connect(({ state }) => {
+export type WithDataProps = {
+  state: {
+    loadingText: string
+  }
+}
+
+const withData = connect(({ state }: WithDataProps) => {
   return {
     content: state.loadingText
   }
@@ -9,7 +15,11 @@ const withData = connect(({ state }) => {
 
 export default withData(Loading)
 
-function Loading(props) {
+export type LoadingProps = {
+  content: string
+}
+
+function Loading(props: LoadingProps) {
   if (!props.content) {
     return null;
   }

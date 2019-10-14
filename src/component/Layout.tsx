@@ -5,7 +5,7 @@ import BackToTop from "./BackToTop";
 import Alert from "./Alert";
 import Loading from "./Loading";
 
-export default function Layout({ children }) {
+export default function Layout({ children }: React.PropsWithChildren<{}>) {
   return (
     <div style={{ height: "100%", background: "#fff" }}>
       <Style name="main" />

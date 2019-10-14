@@ -4,6 +4,15 @@ import { Link } from "react-imvc/component";
 import connect from "react-imvc/hoc/connect";
 import UserInfo from "./UserInfo";
 
+export type WithDataProps = {
+  state: {
+    showMenu: boolean
+  },
+  handlers: {
+    handleCloseMenu: (...args: any[]) => void
+  }
+}
+
 const withData = connect(({ state, handlers }) => {
   return {
     showMenu: state.showMenu,
@@ -13,7 +22,12 @@ const withData = connect(({ state, handlers }) => {
 
 export default withData(Menu);
 
-function Menu(props) {
+export type MenuProps = {
+  showMenu: boolean,
+  onClose: (event: React.MouseEvent<HTMLElement, MouseEvent>) => void
+}
+
+function Menu(props: MenuProps) {
   let className = classnames({
     "nav-list": true,
     show: props.showMenu
@@ -61,7 +75,15 @@ function Menu(props) {
   );
 }
 
-const withCurrentPath = connect(({ state }) => {
+export type WithCurrentPathProps = {
+  state: {
+    location: {
+      raw: string
+    }
+  }
+}
+
+const withCurrentPath = connect(({ state }: WithCurrentPathProps) => {
   return {
     current: state.location.raw
   };
@@ -69,7 +91,13 @@ const withCurrentPath = connect(({ state }) => {
 
 const MenuItemWithCheck = withCurrentPath(MenuItem);
 
-function MenuItem(props) {
+export type MenuItemProps = {
+  current: string,
+  to: string,
+  [propName: string]: any
+}
+
+function MenuItem(props: MenuItemProps) {
   if (props.to === props.current) {
     let { to, current, ...rest } = props;
     return <li {...rest} />;
