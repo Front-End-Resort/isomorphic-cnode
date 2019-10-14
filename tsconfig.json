@@ -1,0 +1,3 @@
+{
+  "extends": "react-imvc/tsconfig.json"
+}

@@ -1,16 +1,25 @@
 // base controller class
 import Controller from "react-imvc/controller";
+import { State, ActionsType, ViewType } from 'react-imvc'
 import querystring from "querystring";
 import sharedInitialState from "./sharedInitialState";
 import * as sharedActions from "./sharedActions";
 
-export default class extends Controller {
+export type ExtralState = {
+  showAddButton: boolean
+  userInfo: Promise<any>
+  isLogin: boolean
+}
+
+export type ExtralActions = typeof sharedActions
+
+export default class<S extends object, AS extends ActionsType<S, AS>> extends Controller<S & ExtralState, AS & ExtralActions> {
   SSR = true
   preload = {
     main: "/css/main.css"
   };
 
-  async getInitialState(initialState) {
+  async getInitialState(initialState: S & State) {
     let userInfo = await this.getUserInfo();
     let isLogin = this.isLogin();
     let showAddButton = isLogin;
@@ -27,7 +36,7 @@ export default class extends Controller {
   /**
      * 动态合并共享的 actions
      */
-  getFinalActions(actions) {
+  getFinalActions(actions: AS) {
     return {
       ...actions,
       ...sharedActions
@@ -37,7 +46,7 @@ export default class extends Controller {
   /**
    * 数据重用后，将服务端的 userInfo 存入 context 里给其他页面使用
    */
-  stateDidReuse(state) {
+  stateDidReuse(state: S & ExtralState) {
     if (state.userInfo) {
       this.context.userInfo = state.userInfo;
     }
@@ -81,7 +90,7 @@ export default class extends Controller {
     return userInfo;
   }
 
-  async fetchUserInfo(accesstoken) {
+  async fetchUserInfo(accesstoken: string) {
     if (!accesstoken) {
       return null;
     }
@@ -97,7 +106,16 @@ export default class extends Controller {
   }
 
   // 封装 get 方法，处理 cnode 跨域要求
-  get(api, params, options = {}) {
+  get(
+    api: string,
+    params: Record<string, string>,
+    options?: RequestInit & {
+      raw?: boolean
+      json?: boolean
+      timeout?: number
+      timeoutErrorFormatter?: ((opstion: any) => string) | string
+    }
+  ) {
     options = {
       ...options,
       credentials: "omit",
@@ -110,7 +128,15 @@ export default class extends Controller {
   }
 
   // 封装 post 方法，处理 cnode 跨域要求
-  post(api, params, options = {}) {
+  post(
+    api: string,
+    data: any,
+    options?: RequestInit & {
+      raw?: boolean
+      json?: boolean
+      timeout?: number
+      timeoutErrorFormatter?: ((opstion: any) => string) | string
+    }) {
     options = {
       ...options,
       credentials: "omit",
@@ -119,13 +145,21 @@ export default class extends Controller {
         ...options.headers,
         "Content-Type": "application/x-www-form-urlencoded"
       },
-      body: querystring.stringify(params)
+      body: querystring.stringify(data)
     };
     return this.fetch(api, options);
   }
 
   // 统一抛错, get/post 方法底层调用的是 fetch 方法
-  async fetch(url, options) {
+  async fetch(
+    url: string,
+    options: RequestInit & {
+      raw?: boolean
+      json?: boolean
+      timeout?: number
+      timeoutErrorFormatter?: ((opstion: any) => string) | string
+    } = {}
+  ) {
     let data = await super.fetch(url, options);
     let { success, error_msg, ...userInfo } = data;
 
@@ -142,13 +176,13 @@ export default class extends Controller {
   };
 
   // 显示提示信息
-  showAlert = text => {
+  showAlert = (text: string) => {
     let { UPDATE_ALERT_TEXT } = this.store.actions;
     UPDATE_ALERT_TEXT(text);
     setTimeout(this.hideAlert, 1000);
   };
 
-  showLoading = content => {
+  showLoading = (content: string) => {
     let { UPDATE_LOADING_TEXT } = this.store.actions;
     UPDATE_LOADING_TEXT(content);
   };
