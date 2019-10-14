@@ -4,7 +4,7 @@ export type State = {
   shouldShow: boolean
 }
 
-export default class BackToTop extends React.Component<State> {
+export default class BackToTop extends React.Component<{}, State> {
   state = {
     shouldShow: false
   };
