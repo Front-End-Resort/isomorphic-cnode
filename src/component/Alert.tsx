@@ -1,7 +1,13 @@
 import React from "react";
 import connect from 'react-imvc/hoc/connect'
 
-const withData = connect(({ state }) => {
+export type WithDataProps = {
+  state: {
+    alertText: string
+  }
+}
+
+const withData = connect(({ state }: WithDataProps) => {
   return {
     content: state.alertText
   }
@@ -9,7 +15,11 @@ const withData = connect(({ state }) => {
 
 export default withData(Alert)
 
-function Alert(props) {
+export type Props = {
+  content: string
+}
+
+function Alert(props: Props) {
   if (!props.content) {
     return null;
   }
