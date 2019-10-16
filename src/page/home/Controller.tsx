@@ -4,22 +4,20 @@ import * as _ from "../../shared/util";
 import * as Model from "./Model";
 import View from "./View";
 
-let { initialState, ...actions } = Model
-
-export default class extends Controller<Model.State, typeof actions> {
+export default class extends Controller<Model.State, Omit<typeof Model, 'initialState'>> {
   KeepAlive = true;
   View = View;
   Model = Model
   // 动态构造初始化数据，从查询字符串里获取数据
   async getInitialState<S>(initialState: S & BaseState) {
-    let state = await super.getInitialState(initialState);
-    let query = state.location.query;
-    let searchParams = { ...state.searchParams };
-    let pageTitle = state.pageTitle;
+    let state = await super.getInitialState(initialState)
+    let query = state.location.query || {}
+    let searchParams = { ...state.searchParams }
+    let pageTitle = state.pageTitle
 
     if (query.tab) {
-      searchParams.tab = query.tab;
-      pageTitle = _.getTitleByTab(query.tab as string);
+      searchParams.tab = query.tab
+      pageTitle = _.getTitleByTab(query.tab as string)
     }
 
     return {

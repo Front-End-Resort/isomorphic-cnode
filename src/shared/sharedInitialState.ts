@@ -2,7 +2,24 @@
  * shared initial state
  */
 
-export default {
+export type ExtralState = {
+  html: {
+    title: string
+    description: string
+    keywords: string
+  }
+  pageTitle: string
+  showMenu: boolean
+  fixedHeader: true
+  showAddButton?: boolean
+  messageCount: number
+  alertText: string
+  loadingText: string
+  userInfo?: object | null
+  isLogin?: boolean
+}
+
+const sharedInitialState: ExtralState = {
   // html config
   html: {
     title: "isomorphic-cnode",
@@ -26,3 +43,5 @@ export default {
   // laoding 话术
   loadingText: ""
 };
+
+export default sharedInitialState

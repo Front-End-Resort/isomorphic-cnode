@@ -2,14 +2,8 @@
 import Controller from "react-imvc/controller";
 import { Actions, BaseState } from 'react-imvc'
 import querystring from "querystring";
-import sharedInitialState from "./sharedInitialState";
+import sharedInitialState, { ExtralState } from "./sharedInitialState";
 import * as sharedActions from "./sharedActions";
-
-export type ExtralState = {
-  showAddButton?: boolean
-  userInfo?: Promise<any>
-  isLogin?: boolean
-}
 
 export type ExtralActions = typeof sharedActions
 
@@ -46,7 +40,7 @@ export default class<S extends object, AS extends Actions<S & BaseState>> extend
   /**
    * 数据重用后，将服务端的 userInfo 存入 context 里给其他页面使用
    */
-  stateDidReuse(state: S & ExtralState) {
+  stateDidReuse(state: S & ExtralState & BaseState) {
     if (state.userInfo) {
       this.context.userInfo = state.userInfo;
     }
@@ -84,7 +78,7 @@ export default class<S extends object, AS extends Actions<S & BaseState>> extend
         context.userInfo = userInfo;
       }
     } catch (_) {
-      context.userInfo = null;
+      context.userInfo = undefined;
     }
 
     return userInfo;
@@ -120,7 +114,7 @@ export default class<S extends object, AS extends Actions<S & BaseState>> extend
       ...options,
       credentials: "omit",
       headers: {
-        ...options.headers,
+        ...(options && options.headers),
         "Content-Type": "application/x-www-form-urlencoded"
       }
     };
@@ -142,7 +136,7 @@ export default class<S extends object, AS extends Actions<S & BaseState>> extend
       credentials: "omit",
       method: "POST",
       headers: {
-        ...options.headers,
+        ...(options && options.headers),
         "Content-Type": "application/x-www-form-urlencoded"
       },
       body: querystring.stringify(data)

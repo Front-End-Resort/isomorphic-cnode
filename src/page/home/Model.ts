@@ -1,3 +1,4 @@
+import { WithBase } from 'react-imvc'
 /**
  * Model
  */
@@ -30,7 +31,7 @@ export const initialState = {
 /**
  * 在 View 创建前将首屏数据合并到 state 里
  */
-export const COMPONENT_WILL_CREATE = (state: State, data: AddData) => {
+export const COMPONENT_WILL_CREATE = (state: WithBase<State>, data: AddData) => {
   return ADD_TOPICS(state, data)
 }
 
@@ -42,7 +43,7 @@ export type ScrollPayload = {
   data: AddData,
   searchParams: SearchParams
 }
-export const SCROLL_TO_BOTTOM = (state: State, { data, searchParams }: ScrollPayload) => {
+export const SCROLL_TO_BOTTOM = (state: WithBase<State>, { data, searchParams }: ScrollPayload) => {
   state = ADD_TOPICS(state, data);
   state = UPDATE_SEARCH_PARAMS(state, searchParams)
   return state
@@ -52,7 +53,7 @@ export const SCROLL_TO_BOTTOM = (state: State, { data, searchParams }: ScrollPay
 /**
  * 更新查询参数
  */
-export const UPDATE_SEARCH_PARAMS = (state: State, searchParams: SearchParams) => {
+export const UPDATE_SEARCH_PARAMS = (state: WithBase<State>, searchParams: SearchParams) => {
   return {
     ...state,
     searchParams,
@@ -65,7 +66,7 @@ export type AddData = {
   content: string,
   [x: string]: any
 }[]
-export const ADD_TOPICS = (state: State, data: AddData) => {
+export const ADD_TOPICS = (state: WithBase<State>, data: AddData) => {
   let topics = data.map(item => {
     let { content, ...topic } = item;
     return topic;

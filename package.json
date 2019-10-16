@@ -6,7 +6,8 @@
   "scripts": {
     "start": "react-imvc start --config ./imvc.config.ts",
     "debug": "react-imvc start?inspect --config ./imvc.config.ts",
-    "build": "react-imvc build --config ./imvc.config.ts"
+    "build": "react-imvc build --config ./imvc.config.ts",
+    "delete": "rimraf ./node_modules/create-history&rimraf node_modules/create-app&rimraf node_modules/relite&rimraf node_modules/react-imvc"
   },
   "repository": {
     "type": "git",
@@ -21,10 +22,13 @@
   "homepage": "https://github.com/Lucifier129/isomorphic-cnode#readme",
   "dependencies": {
     "@types/node": "^12.7.12",
+    "debug": "^4.1.1",
     "markdown": "^0.5.0",
     "react": "^16.8.0",
     "react-dom": "^16.8.0",
-    "react-imvc": "^2.4.0"
+    "react-imvc": "^2.4.0",
+    "split-on-first": "^1.1.0",
+    "yargs": "^14.2.0"
   },
   "devDependencies": {
     "tslint-config-prettier": "^1.18.0",

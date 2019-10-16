@@ -1,3 +1,26 @@
 {
-  "extends": "react-imvc/tsconfig.json"
+  "compilerOptions": {
+    "outDir": "dist",
+    "declaration": true,
+    "sourceMap": false,
+    "target": "es5",
+    "module": "commonjs",
+    "skipLibCheck": true,
+    "allowSyntheticDefaultImports": true,
+    "moduleResolution": "node",
+    "allowJs": false,
+    "noUnusedLocals": true,
+    "strictNullChecks": true,
+    "noImplicitAny": true,
+    "noImplicitThis": true,
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "removeComments": false,
+    "jsx": "react",
+    "lib": ["esnext", "dom.iterable", "dom"],
+    "types": ["node"],
+  },
+  "include": [
+    "src"
+  ]
 }
