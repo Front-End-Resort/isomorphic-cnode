@@ -1,16 +1,17 @@
 /**
  * Model
  */
+export type SearchParams = {
+  page: number,
+  limit: number,
+  tab: string,
+  mdrender: boolean
+}
 
 export type State = {
   pageTitle: string,
   topics: any[],
-  searchParams: {
-    page: number,
-    limit: number,
-    tab: string,
-    mdrender: boolean
-  }
+  searchParams: SearchParams
 }
 
 export const initialState = {
@@ -29,7 +30,7 @@ export const initialState = {
 /**
  * 在 View 创建前将首屏数据合并到 state 里
  */
-export const COMPONENT_WILL_CREATE = (state, data) => {
+export const COMPONENT_WILL_CREATE = (state: State, data: AddData) => {
   return ADD_TOPICS(state, data)
 }
 
@@ -37,7 +38,11 @@ export const COMPONENT_WILL_CREATE = (state, data) => {
  * 
  * 滚动到底部时，加载新的数据并更新查询参数
  */
-export const SCROLL_TO_BOTTOM = (state, { data, searchParams }) => {
+export type ScrollPayload = {
+  data: AddData,
+  searchParams: SearchParams
+}
+export const SCROLL_TO_BOTTOM = (state: State, { data, searchParams }: ScrollPayload) => {
   state = ADD_TOPICS(state, data);
   state = UPDATE_SEARCH_PARAMS(state, searchParams)
   return state
@@ -47,7 +52,7 @@ export const SCROLL_TO_BOTTOM = (state, { data, searchParams }) => {
 /**
  * 更新查询参数
  */
-export const UPDATE_SEARCH_PARAMS = (state, searchParams) => {
+export const UPDATE_SEARCH_PARAMS = (state: State, searchParams: SearchParams) => {
   return {
     ...state,
     searchParams,
@@ -56,7 +61,11 @@ export const UPDATE_SEARCH_PARAMS = (state, searchParams) => {
 
 
 // 添加主题列表
-export const ADD_TOPICS = (state, data) => {
+export type AddData = {
+  content: string,
+  [x: string]: any
+}[]
+export const ADD_TOPICS = (state: State, data: AddData) => {
   let topics = data.map(item => {
     let { content, ...topic } = item;
     return topic;

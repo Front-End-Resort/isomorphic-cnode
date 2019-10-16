@@ -1,6 +1,6 @@
 // base controller class
 import Controller from "react-imvc/controller";
-import { ActionsType } from 'react-imvc'
+import { Actions, BaseState } from 'react-imvc'
 import querystring from "querystring";
 import sharedInitialState from "./sharedInitialState";
 import * as sharedActions from "./sharedActions";
@@ -13,11 +13,11 @@ export type ExtralState = {
 
 export type ExtralActions = typeof sharedActions
 
-export default class<S extends object, AS extends ActionsType<S, AS>> extends Controller<S, AS, ExtralState, ExtralActions> {
+export default class<S extends object, AS extends Actions<S & BaseState>> extends Controller<S, AS, ExtralState, ExtralActions> {
   SSR = true
   preload = {
     main: "/css/main.css"
-  };
+  }
 
   async getInitialState<S>(initialState: S) {
     let userInfo = await this.getUserInfo();
@@ -108,7 +108,7 @@ export default class<S extends object, AS extends ActionsType<S, AS>> extends Co
   // 封装 get 方法，处理 cnode 跨域要求
   get(
     api: string,
-    params: Record<string, string>,
+    params: Record<string, string | number | boolean>,
     options?: RequestInit & {
       raw?: boolean
       json?: boolean

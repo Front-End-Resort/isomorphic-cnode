@@ -1,15 +1,17 @@
 import Controller from "../../shared/BaseController";
+import { BaseState } from 'react-imvc'
 import * as _ from "../../shared/util";
 import * as Model from "./Model";
 import View from "./View";
-import util from 'react-imvc/util'
 
-export default class extends Controller {
+let { initialState, ...actions } = Model
+
+export default class extends Controller<Model.State, typeof actions> {
   KeepAlive = true;
   View = View;
-  Model = Model;
+  Model = Model
   // 动态构造初始化数据，从查询字符串里获取数据
-  async getInitialState(initialState) {
+  async getInitialState<S>(initialState: S & BaseState) {
     let state = await super.getInitialState(initialState);
     let query = state.location.query;
     let searchParams = { ...state.searchParams };
@@ -17,7 +19,7 @@ export default class extends Controller {
 
     if (query.tab) {
       searchParams.tab = query.tab;
-      pageTitle = _.getTitleByTab(query.tab);
+      pageTitle = _.getTitleByTab(query.tab as string);
     }
 
     return {
@@ -37,11 +39,7 @@ export default class extends Controller {
   }
 
   componentDidMount() {
-    window.addEventListener("scroll", this.handleScroll);
-    // prefetch all js bundles
-    // util.getFlatList(this.routes)
-    //   .map(item => item.controller)
-    //   .forEach(this.loader)
+    window.addEventListener("scroll", this.handleScroll)
   }
 
   componentWillUnmount() {
