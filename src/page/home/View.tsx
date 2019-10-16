@@ -4,8 +4,17 @@ import { purify } from "../../shared/hoc";
 import Layout from "../../component/Layout";
 import * as _ from "../../shared/util";
 
+export type ViewProps = {
+  state: {
+    topics: {
+      id: string,
+      [x: string]: any
+    }[]
+  }
+}
 
-export default function View({ state, handlers }) {
+
+export default function View({ state }: ViewProps) {
   return (
     <Layout>
       <section id="page">
@@ -19,7 +28,23 @@ export default function View({ state, handlers }) {
 
 const PureTopic = purify()(Topic);
 
-function Topic(props) {
+export interface TopicProps {
+  id: string,
+  title: string,
+  good: string,
+  top: string,
+  tab: string,
+  author: {
+    avatar_url: string,
+    loginname: string
+  },
+  reply_count: number,
+  create_at: string,
+  last_reply_at: string,
+  visit_count: number
+}
+
+function Topic(props: TopicProps) {
   let {
     id,
     title,

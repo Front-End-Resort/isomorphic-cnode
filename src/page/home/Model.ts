@@ -2,6 +2,17 @@
  * Model
  */
 
+export type State = {
+  pageTitle: string,
+  topics: any[],
+  searchParams: {
+    page: number,
+    limit: number,
+    tab: string,
+    mdrender: boolean
+  }
+}
+
 export const initialState = {
   pageTitle: '首页',
   // 主题列表
