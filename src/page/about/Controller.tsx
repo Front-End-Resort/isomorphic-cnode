@@ -2,14 +2,19 @@ import Controller from "../../shared/BaseController";
 import React from "react";
 import Layout from "../../component/Layout";
 
-export default class extends Controller {
+export type State = {
+  pageTitle: string
+}
+const initialState: State = {
+  pageTitle: "关于"
+};
+
+export default class extends Controller<State, {}> {
   View = View;
-  initialState = {
-    pageTitle: "关于"
-  };
+  initialState = initialState
 }
 
-function View({ state, handlers }) {
+function View() {
   return (
     <Layout>
       <dl className="about-info">

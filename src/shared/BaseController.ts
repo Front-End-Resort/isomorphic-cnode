@@ -1,25 +1,25 @@
 // base controller class
 import Controller from "react-imvc/controller";
-import { State, ActionsType, ViewType } from 'react-imvc'
+import { ActionsType } from 'react-imvc'
 import querystring from "querystring";
 import sharedInitialState from "./sharedInitialState";
 import * as sharedActions from "./sharedActions";
 
 export type ExtralState = {
-  showAddButton: boolean
-  userInfo: Promise<any>
-  isLogin: boolean
+  showAddButton?: boolean
+  userInfo?: Promise<any>
+  isLogin?: boolean
 }
 
 export type ExtralActions = typeof sharedActions
 
-export default class<S extends object, AS extends ActionsType<S, AS>> extends Controller<S & ExtralState, AS & ExtralActions> {
+export default class<S extends object, AS extends ActionsType<S, AS>> extends Controller<S, AS, ExtralState, ExtralActions> {
   SSR = true
   preload = {
     main: "/css/main.css"
   };
 
-  async getInitialState(initialState: S & State) {
+  async getInitialState<S>(initialState: S) {
     let userInfo = await this.getUserInfo();
     let isLogin = this.isLogin();
     let showAddButton = isLogin;
@@ -36,7 +36,7 @@ export default class<S extends object, AS extends ActionsType<S, AS>> extends Co
   /**
      * 动态合并共享的 actions
      */
-  getFinalActions(actions: AS) {
+  getFinalActions<AS>(actions: AS) {
     return {
       ...actions,
       ...sharedActions
