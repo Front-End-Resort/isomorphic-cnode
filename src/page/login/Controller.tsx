@@ -8,7 +8,7 @@ export interface State {
   token: string
 }
 
-export default class extends Controller<State, {}> {
+class Login extends Controller<State, {}> {
   View = View;
 
   initialState = {
@@ -16,7 +16,7 @@ export default class extends Controller<State, {}> {
     token: ""
   };
 
-  shouldComponentCreate() {
+  async shouldComponentCreate() {
     let { context, location } = this;
     // 如果已经登陆，重定向离开
     if (this.isLogin()) {
@@ -31,8 +31,7 @@ export default class extends Controller<State, {}> {
   }
 
   handleLogin = async () => {
-    let { context } = this;
-    let { token, location } = this.store.getState();
+    let { token } = this.store.getState();
 
     if (!token || token.length !== 36) {
       this.showAlert("令牌格式错误, 应为36位UUID字符串");
@@ -58,6 +57,8 @@ export default class extends Controller<State, {}> {
   };
 }
 
+export default Login
+
 export interface ViewProps {
   state: {
     alertText: string
@@ -68,7 +69,7 @@ export interface ViewProps {
   }
 }
 
-function View({ state, ctrl }: ViewProps) {
+function View({ ctrl }: ViewProps) {
   // let { alertText, loadingText } = state;
   let { handleLogin } = ctrl;
 

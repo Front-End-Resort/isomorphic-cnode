@@ -1,9 +1,8 @@
-import React, { Component } from "react";
+import React from "react";
 import classnames from "classnames";
 import { Link } from "react-imvc/component";
 import connect from 'react-imvc/hoc/connect'
 import Menu from "./Menu";
-import { number } from "prop-types";
 
 export type WithDataProps = {
   state: {

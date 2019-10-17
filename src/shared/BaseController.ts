@@ -7,7 +7,7 @@ import * as sharedActions from "./sharedActions";
 
 export type ExtralActions = typeof sharedActions
 
-export default class<S extends object, AS extends Actions<S & BaseState>> extends Controller<S, AS, ExtralState, ExtralActions> {
+class BaseController<S extends object, AS extends Actions<S & BaseState>> extends Controller<S, AS, ExtralState, ExtralActions> {
   SSR = true
   preload = {
     main: "/css/main.css"
@@ -61,7 +61,7 @@ export default class<S extends object, AS extends Actions<S & BaseState>> extend
   }
 
   pageDidBack() {
-    this.hideLoading();
+    this.hideLoading()
   }
 
   async getUserInfo() {
@@ -204,3 +204,5 @@ export default class<S extends object, AS extends Actions<S & BaseState>> extend
     window.location.reload();
   };
 }
+
+export default BaseController

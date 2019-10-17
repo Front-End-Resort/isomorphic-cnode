@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-imvc/component";
 import connect from 'react-imvc/hoc/connect'
+import { UserInfo as UserInfoInte } from "../shared/sharedInitialState";
 
 export type WithDataProps = {
   state: {
@@ -8,12 +9,8 @@ export type WithDataProps = {
       pattern: string,
       raw: string
     },
-    userInfo: {
-      loginname: string
-    },
-    user: {
-      loginname: string
-    }
+    userInfo: UserInfoInte,
+    user: UserInfoInte
   },
   handlers: {
     handleLogout: (event: React.MouseEvent<HTMLLIElement, MouseEvent>) => void
@@ -36,16 +33,12 @@ export type UserInfoProps = {
     pattern: string,
     raw: string
   },
-  userInfo: {
-    loginname: string
-  },
-  user: {
-    loginname: string
-  },
+  userInfo: UserInfoInte,
+  user: UserInfoInte,
   onLogout: (event: React.MouseEvent<HTMLLIElement, MouseEvent>) => void
 }
 
-function UserInfo({ location, userInfo, user, onLogout }) {
+function UserInfo({ location, userInfo, user, onLogout }: UserInfoProps) {
   let showLogout =
     location.pattern === "/user/:loginname" &&
     userInfo &&
@@ -53,7 +46,7 @@ function UserInfo({ location, userInfo, user, onLogout }) {
     userInfo.loginname === user.loginname;
   return (
     <div className="user-info">
-      <User if={!showLogout && userInfo} info={userInfo} />
+      <User if={!showLogout && !!userInfo} info={userInfo} />
       <Login if={!showLogout && !userInfo} redirect={location.raw} />
       <Logout if={showLogout} onLogout={onLogout} />
     </div>
@@ -100,10 +93,7 @@ function Logout(props: LogoutProps) {
 
 export type UserProps = {
   if: boolean
-  info: {
-    loginname: string,
-    avatar_url: string
-  }
+  info: UserInfoInte
 }
 
 function User(props: UserProps) {
