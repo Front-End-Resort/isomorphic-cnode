@@ -3,38 +3,61 @@ import classnames from "classnames";
 import { Link } from "react-imvc/component";
 import Layout from "../../component/Layout";
 import { getLastTimeStr } from "../../shared/util";
+import { UserInfo, Message } from "../../shared/sharedInitialState";
+import { TYPE } from './Model'
 
-export default function View({ state, handlers }) {
+export interface ViewProps {
+  state: {
+    user: UserInfo,
+    type: TYPE
+  },
+  ctrl: {
+    handleTypeChange: (event: React.MouseEvent<HTMLLIElement, MouseEvent>) => void
+  }
+}
+
+export default function View({ state, ctrl }: ViewProps) {
   let { user, type } = state;
-  let currentData = user[`recent_${type}`] || [];
+  let key = `recent_${type}` as keyof UserInfo
+  let currentData = user[key] || [];
 
   return (
     <Layout>
       <UserInfo user={user} />
       <UserTopics
         type={type}
-        currentData={currentData}
-        onChange={handlers.handleTypeChange}
+        currentData={currentData as Message[]}
+        onChange={ctrl.handleTypeChange}
       />
     </Layout>
   );
 }
 
-function UserInfo({ user }) {
+export interface UserInfoProps {
+  user: UserInfo
+}
+
+function UserInfo({ user }: UserInfoProps) {
   return (
     <section className="userinfo">
       <img className="u-img" src={user.avatar_url} />
       <br />
       <span className="u-name">{user.loginname}</span>
       <div className="u-bottom">
-        <span className="u-time">{getLastTimeStr(user.create_at, false)}</span>
+        <span className="u-time">{getLastTimeStr(user.create_at.toString(), false)}</span>
         <span className="u-score">积分：{user.score}</span>
       </div>
     </section>
   );
 }
 
-function UserTopics({ currentData, type, onChange }) {
+export interface UserTopicsProps {
+  currentData: Message[]
+  type: TYPE,
+  onChange: (event: React.MouseEvent<HTMLLIElement, MouseEvent>) => void
+}
+
+function UserTopics({ currentData, type, onChange }: UserTopicsProps) {
   return (
     <section className="topics">
       <ul className="user-tabs">
@@ -58,7 +81,13 @@ function UserTopics({ currentData, type, onChange }) {
   );
 }
 
-function TabItem({ type, selected, children, onChange }) {
+export interface TabItem {
+  type: TYPE,
+  selected: boolean,
+  onChange: (event: React.MouseEvent<HTMLLIElement, MouseEvent>) => void
+}
+
+function TabItem({ type, selected, children, onChange }: React.PropsWithChildren<TabItem>) {
   let className = classnames({
     item: true,
     br: true,
@@ -71,7 +100,11 @@ function TabItem({ type, selected, children, onChange }) {
   );
 }
 
-function MessageList({ list }) {
+export interface MessageListProps {
+  list: Message[]
+}
+
+function MessageList({ list }: MessageListProps) {
   if (!list || list.length === 0) {
     return (
       <div className="no-data">
@@ -86,7 +119,8 @@ function MessageList({ list }) {
   );
 }
 
-function Message(props) {
+
+function Message(props: Message) {
   let { id, title, author, last_reply_at } = props;
   return (
     <div className="message markdown-body">
@@ -103,7 +137,7 @@ function Message(props) {
             <span className="name">{author.loginname}</span>
           </span>
           <span className="cr">
-            <span className="name">{getLastTimeStr(last_reply_at, true)}</span>
+            <span className="name">{getLastTimeStr(last_reply_at ? last_reply_at.toString() : '', true)}</span>
           </span>
         </Link>
       </section>

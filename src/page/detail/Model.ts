@@ -3,9 +3,8 @@
  */
 import { WithBase } from 'react-imvc'
 import { UPDATE_HTML_TITLE } from "../../shared/sharedActions";
-import { ExtralState, UserInfo } from "../../shared/sharedInitialState";
+import { ExtralState, UserInfo, Reply, Topic } from "../../shared/sharedInitialState";
 import { markdown } from "markdown";
-import { Reply, Topic } from './View'
 
 export interface State {
   pageTitle: string,

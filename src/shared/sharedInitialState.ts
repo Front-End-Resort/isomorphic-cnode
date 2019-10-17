@@ -1,11 +1,52 @@
 /**
  * shared initial state
  */
+
+export interface Message {
+  id: string,
+  author: {
+    avatar_url: string,
+    loginname: string
+  },
+  title?: string,
+  last_reply_at?: number
+}
+
+export interface Reply extends Message {
+  author: {
+    avatar_url: string
+    loginname: string
+  }
+  id: string
+  isUps?: boolean,
+  ups: string[],
+  create_at: number,
+  content: string
+}
+export interface Topic extends Message {
+  tab: string
+  good: string
+  top: string
+  author: {
+    avatar_url: string
+    loginname: string
+  }
+  create_at: string
+  visit_count: number
+  title: string
+  content: string
+  reply_count: number
+  replies: Reply[]
+}
 export interface UserInfo {
   id: string
   token: string
   avatar_url: string
   loginname: string
+  create_at: number
+  recent_replies: Reply[]
+  recent_topics: Topic[],
+  score: number
 }
 export type ExtralState = {
   html?: {

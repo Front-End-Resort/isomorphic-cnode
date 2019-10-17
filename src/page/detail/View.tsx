@@ -5,6 +5,7 @@ import { useCtrl, useModel, useModelActions } from 'react-imvc/hook'
 import { purify, staticify } from '../../shared/hoc'
 import * as _ from "../../shared/util";
 import Layout from "../../component/Layout";
+import { Reply, Topic } from "../../shared/sharedInitialState";
 
 export type ViewProps = {
   state: {
@@ -91,22 +92,6 @@ function NoTopic() {
       </div>
     </div>
   );
-}
-
-export interface Topic {
-  tab: string
-  good: string
-  top: string
-  author: {
-    avatar_url: string
-    loginname: string
-  }
-  create_at: string
-  visit_count: number
-  title: string
-  content: string
-  reply_count: number
-  replies: Reply[]
 }
 
 export interface TopicAuthorInfoProps {
@@ -200,18 +185,6 @@ function TopicReplyList({ replies, replyOfOthers, activeReplyId, isLogin, ctrl }
       </ul>
     </section>
   );
-}
-
-export interface Reply {
-  author: {
-    avatar_url: string
-    loginname: string
-  }
-  id: string
-  isUps?: boolean,
-  ups: string[],
-  create_at: number,
-  content: string
 }
 
 const PureReplyItem = purify()(ReplyItem)

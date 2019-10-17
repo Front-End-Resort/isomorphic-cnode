@@ -2,7 +2,7 @@ import Controller from "../../shared/BaseController";
 import * as Model from "./Model";
 import View from "./View";
 
-export default class extends Controller {
+export default class extends Controller<Model.State, Omit<typeof Model, 'initialState'>> {
   KeepAlive = true
   View = View;
   Model = Model;
@@ -15,9 +15,9 @@ export default class extends Controller {
     COMPONENT_WILL_CREATE({ user });
   }
 
-  handleTypeChange = ({ currentTarget }) => {
+  handleTypeChange = ({ currentTarget }: React.MouseEvent<HTMLLIElement, MouseEvent>) => {
     let { CHANGE_TYPE } = this.store.actions;
-    let type = currentTarget.getAttribute("data-type");
+    let type = currentTarget.getAttribute("data-type") as Model.TYPE
     CHANGE_TYPE(type);
   };
 }
