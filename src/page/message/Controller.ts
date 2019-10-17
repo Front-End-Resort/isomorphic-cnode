@@ -2,7 +2,7 @@ import Controller from "../../shared/BaseController";
 import * as Model from "./Model";
 import View from "./View";
 
-export default class extends Controller {
+export default class extends Controller<Model.State, Omit<typeof Model, 'initialState'>> {
   KeepAlive = true;
   NeedLogin = true;
   Model = Model;
@@ -19,10 +19,10 @@ export default class extends Controller {
     });
   }
 
-  handleTabChange = ({ currentTarget }) => {
+  handleTabChange = ({ currentTarget }: React.MouseEvent<HTMLLIElement, MouseEvent>) => {
     let tab = currentTarget.getAttribute("data-tab");
     let { CHANGE_TAB } = this.store.actions;
-    CHANGE_TAB(tab);
+    CHANGE_TAB(tab as Model.TAB);
   };
 
   handleMarkAll = async () => {

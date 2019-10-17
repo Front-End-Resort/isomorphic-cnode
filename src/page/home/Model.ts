@@ -1,4 +1,3 @@
-import { WithBase } from 'react-imvc'
 /**
  * Model
  */

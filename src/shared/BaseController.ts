@@ -102,7 +102,7 @@ export default class<S extends object, AS extends Actions<S & BaseState>> extend
   // 封装 get 方法，处理 cnode 跨域要求
   get(
     api: string,
-    params: Record<string, string | number | boolean>,
+    params?: Record<string, string | number | boolean>,
     options?: RequestInit & {
       raw?: boolean
       json?: boolean
@@ -124,7 +124,7 @@ export default class<S extends object, AS extends Actions<S & BaseState>> extend
   // 封装 post 方法，处理 cnode 跨域要求
   post(
     api: string,
-    data: any,
+    data?: any,
     options?: RequestInit & {
       raw?: boolean
       json?: boolean

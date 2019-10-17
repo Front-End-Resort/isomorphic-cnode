@@ -3,8 +3,21 @@ import classnames from "classnames";
 import { Link } from "react-imvc/component";
 import Layout from "../../component/Layout";
 import * as _ from '../../shared/util'
+import { TAB } from './Model'
 
-export default function View({ state, handlers }) {
+export interface ViewProps {
+  state: {
+    tab: TAB,
+    hasRead: MessageInfo[]
+    hasNotRead: MessageInfo[]
+  },
+  ctrl: {
+    handleTabChange: (event: React.MouseEvent<HTMLLIElement, MouseEvent>) => void
+    handleMarkAll: (event: React.MouseEvent<HTMLLIElement, MouseEvent>) => void
+  }
+}
+
+export default function View({ state, ctrl }: ViewProps) {
   let { tab, hasRead, hasNotRead } = state;
   let hasReadClass = classnames({
     item: true,
@@ -23,18 +36,18 @@ export default function View({ state, handlers }) {
           <li
             className={hasReadClass}
             data-tab="hasRead"
-            onClick={handlers.handleTabChange}
+            onClick={ctrl.handleTabChange}
           >
             已读消息
           </li>
           <li
             className={hasNotReadClass}
             data-tab="hasNotRead"
-            onClick={handlers.handleTabChange}
+            onClick={ctrl.handleTabChange}
           >
             未读消息
             {hasNotRead.length > 0 && (
-              <i className="iconfont read" onClick={handlers.handleMarkAll}>
+              <i className="iconfont read" onClick={ctrl.handleMarkAll}>
                 &#xe60c;
               </i>
             )}
@@ -46,7 +59,11 @@ export default function View({ state, handlers }) {
   );
 }
 
-function MessageContent({ list }) {
+export interface MessageContentProps {
+  list: MessageInfo[]
+}
+
+function MessageContent({ list }: MessageContentProps) {
   if (!list || !list.length) {
     return <Empty />;
   }
@@ -62,7 +79,48 @@ function Empty() {
   );
 }
 
-function MessageInfo(props) {
+export interface Reply {
+  author: {
+    avatar_url: string
+    loginname: string
+  }
+  id: string
+  isUps?: boolean,
+  ups: string[],
+  create_at: number,
+  content: string
+}
+
+export interface Topic {
+  id: string
+  tab: string
+  good: string
+  top: string
+  author: {
+    avatar_url: string
+    loginname: string
+  }
+  create_at: string
+  visit_count: number
+  title: string
+  content: string
+  reply_count: number
+  replies: Reply[]
+}
+
+export interface MessageInfo {
+  id: string,
+  title: string,
+  author: {
+    loginname: string,
+    avatar_url: string
+  },
+  type: string,
+  reply: Reply
+  topic: Topic
+}
+
+function MessageInfo(props: MessageInfo) {
   let { id, title, author, type, reply, topic } = props;
   return (
     <div className="message markdown-body">
@@ -81,7 +139,7 @@ function MessageInfo(props) {
           </span>
           <span className="cr">
             <span className="name">
-              {_.getLastTimeStr(reply.create_at, true)}
+              {_.getLastTimeStr(reply.create_at.toString(), true)}
             </span>
           </span>
         </div>
