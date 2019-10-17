@@ -23,7 +23,7 @@ export default function View({ state, ctrl }: ViewProps) {
 
   return (
     <Layout>
-      <UserInfo user={user} />
+      <UserInfoComponent user={user} />
       <UserTopics
         type={type}
         currentData={currentData as Message[]}
@@ -37,7 +37,7 @@ export interface UserInfoProps {
   user: UserInfo
 }
 
-function UserInfo({ user }: UserInfoProps) {
+function UserInfoComponent({ user }: UserInfoProps) {
   return (
     <section className="userinfo">
       <img className="u-img" src={user.avatar_url} />
@@ -115,12 +115,12 @@ function MessageList({ list }: MessageListProps) {
   }
 
   return (
-    <div>{list.map(message => <Message {...message} key={message.id} />)}</div>
+    <div>{list.map(message => <MessageComponent {...message} key={message.id} />)}</div>
   );
 }
 
 
-function Message(props: Message) {
+function MessageComponent(props: Message) {
   let { id, title, author, last_reply_at } = props;
   return (
     <div className="message markdown-body">
