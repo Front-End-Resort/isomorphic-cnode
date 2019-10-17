@@ -3,7 +3,12 @@ import { Input } from "react-imvc/component";
 import Layout from "../../component/Layout";
 import Controller from "../../shared/BaseController";
 
-export default class extends Controller {
+export interface State {
+  pageTitle: string
+  token: string
+}
+
+export default class extends Controller<State, {}> {
   View = View;
 
   initialState = {
@@ -16,9 +21,9 @@ export default class extends Controller {
     // 如果已经登陆，重定向离开
     if (this.isLogin()) {
       let { userInfo } = context;
-      let targetPath = location.query.redirect;
+      let targetPath = (location.query && location.query.redirect as string) || '';
       if (!targetPath) {
-        targetPath = `${context.basename}/user/${userInfo.loginname}`;
+        targetPath = `${context.basename}/user/${userInfo && userInfo.loginname}`;
       }
       this.redirect(targetPath);
       return false;
@@ -53,9 +58,19 @@ export default class extends Controller {
   };
 }
 
-function View({ state, handlers }) {
-  let { alertText, loadingText } = state;
-  let { handleLogin } = handlers;
+export interface ViewProps {
+  state: {
+    alertText: string
+    loadingText: string
+  },
+  ctrl: {
+    handleLogin: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void
+  }
+}
+
+function View({ state, ctrl }: ViewProps) {
+  // let { alertText, loadingText } = state;
+  let { handleLogin } = ctrl;
 
   return (
     <Layout>

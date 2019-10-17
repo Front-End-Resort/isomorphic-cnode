@@ -1,16 +1,22 @@
-import React, { Component } from "react";
-import classnames from "classnames";
-import { Link, Input } from "react-imvc/component";
+import React from "react";
+import { Input } from "react-imvc/component";
 import Layout from "../../component/Layout";
 
-export default function View({ state, handlers }) {
+export type ViewProps = {
+  state: {},
+  ctrl: {
+    handlePublish: (...any: any[]) => any
+  }
+}
+
+export default function View({ ctrl }: ViewProps) {
   return (
     <Layout>
       <div className="add-container">
         <div className="line">
           选择分类：
           <Select />{" "}
-          <a className="add-btn" onClick={handlers.handlePublish}>
+          <a className="add-btn" onClick={ctrl.handlePublish}>
             发布
           </a>
         </div>

@@ -21,6 +21,7 @@
     "types": ["node"],
   },
   "include": [
-    "src"
+    "src",
+    "markdwon.d.ts"
   ]
 }

@@ -6,13 +6,9 @@ import * as _ from "../../shared/util";
 
 export type ViewProps = {
   state: {
-    topics: {
-      id: string,
-      [x: string]: any
-    }[]
+    topics: TopicProps[]
   }
 }
-
 
 export default function View({ state }: ViewProps) {
   return (

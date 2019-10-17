@@ -2,11 +2,10 @@ import Controller from "../../shared/BaseController";
 import View from "./View";
 import * as Model from "./Model";
 import * as _ from "../../shared/util";
-import { markdown } from "markdown";
 
 const replySuffix = `\n来自 [isomorphic-cnode](https://lucifier129.github.io/isomorphic-cnode/publish/static/)`;
 
-export default class extends Controller {
+export default class extends Controller<Model.State, Model> {
   KeepAlive = true;
   View = View;
   Model = Model;

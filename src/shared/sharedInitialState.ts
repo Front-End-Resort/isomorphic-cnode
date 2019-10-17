@@ -1,21 +1,26 @@
 /**
  * shared initial state
  */
-
+export interface UserInfo {
+  id: string
+  token: string
+  avatar_url: string
+  loginname: string
+}
 export type ExtralState = {
-  html: {
-    title: string
-    description: string
-    keywords: string
+  html?: {
+    title?: string
+    description?: string
+    keywords?: string
   }
   pageTitle: string
   showMenu: boolean
-  fixedHeader: true
-  showAddButton?: boolean
+  fixedHeader: boolean
+  showAddButton: boolean
   messageCount: number
   alertText: string
   loadingText: string
-  userInfo?: object | null
+  userInfo: UserInfo | null
   isLogin?: boolean
 }
 

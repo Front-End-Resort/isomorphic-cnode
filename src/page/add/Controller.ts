@@ -2,7 +2,7 @@ import Controller from "../../shared/BaseController";
 import View from "./View";
 import * as Model from "./Model";
 
-export default class extends Controller {
+export default class extends Controller<Model.State, {}> {
   KeepAlive = true;
   NeedLogin = true;
   View = View;

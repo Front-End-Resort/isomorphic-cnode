@@ -1,7 +1,6 @@
-import { WithBase } from 'react-imvc'
 import { ExtralState } from './sharedInitialState'
 
-export const UPDATE_HTML_TITLE = (state: WithBase<ExtralState>, title: string) => {
+export const UPDATE_HTML_TITLE = <S extends ExtralState>(state: S, title: string) => {
   let html = {
     ...state.html,
     title
@@ -12,7 +11,7 @@ export const UPDATE_HTML_TITLE = (state: WithBase<ExtralState>, title: string) =
   };
 };
 
-export const OPEN_MENU = (state: WithBase<ExtralState>) => {
+export const OPEN_MENU = <S extends ExtralState>(state: S) => {
   if (state.showMenu) {
     return state
   }
@@ -22,7 +21,7 @@ export const OPEN_MENU = (state: WithBase<ExtralState>) => {
   }
 }
 
-export const CLOSE_MENU = (state: WithBase<ExtralState>) => {
+export const CLOSE_MENU = <S extends ExtralState>(state: S) => {
   if (!state.showMenu) {
     return state
   }
@@ -32,14 +31,14 @@ export const CLOSE_MENU = (state: WithBase<ExtralState>) => {
   }
 }
 
-export const UPDATE_ALERT_TEXT = (state: WithBase<ExtralState>, alertText: string) => {
+export const UPDATE_ALERT_TEXT = <S extends ExtralState>(state: S, alertText: string) => {
     return {
       ...state,
       alertText
     };
   };
   
-  export const UPDATE_LOADING_TEXT = (state: WithBase<ExtralState>, loadingText: string) => {
+  export const UPDATE_LOADING_TEXT = <S extends ExtralState>(state: S,  loadingText: string) => {
     return {
       ...state,
       loadingText
