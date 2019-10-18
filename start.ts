@@ -1,7 +1,7 @@
 process.env.NODE_ENV = 'production'
 
 import ReactIMVC from 'react-imvc'
-import config from './imvc.config'
+var config = require('./imvc.config')
 
 ReactIMVC.start({
 	config: {

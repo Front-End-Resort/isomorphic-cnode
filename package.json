@@ -5,7 +5,7 @@
   "main": "imvc.config.js",
   "scripts": {
     "start": "react-imvc start --config ./imvc.config.ts",
-    "debug": "react-imvc start?inspect --config ./imvc.config.ts",
+    "debug": "react-imvc start?inspect-brk --config ./imvc.config.ts",
     "build": "react-imvc build --config ./imvc.config.ts",
     "delete": "rimraf ./node_modules/create-history&rimraf node_modules/create-app&rimraf node_modules/relite&rimraf node_modules/react-imvc"
   },

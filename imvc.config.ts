@@ -1,6 +1,6 @@
 var path = require('path')
 
-export default {
+module.exports = {
 	restapi: 'https://cnodejs.org/api/v1',
 	favicon: path.join(__dirname, 'favicon.ico'),
 	staticEntry: 'index.html',
