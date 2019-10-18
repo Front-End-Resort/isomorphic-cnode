@@ -74,8 +74,11 @@ export const HIDE_REPLY_FORM = <S extends WithBase<State & ExtralState>>(state: 
 };
 
 export const LIKE_REPLY = <S extends WithBase<State & ExtralState>>(state: S, { action, replyId }: { action: string, replyId: string }) => {
-  let { topic } = state;
-  let { token: accesstoken, id: userId } = state.userInfo || {};
+  let { topic, userInfo } = state;
+  let userId: string
+  if (userInfo) {
+    userId = userInfo.id
+  }
 
   let replies = topic && topic.replies.map(reply => {
     if (reply.id !== replyId) {

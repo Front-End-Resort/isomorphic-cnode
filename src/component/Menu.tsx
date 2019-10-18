@@ -4,7 +4,7 @@ import { Link } from "react-imvc/component";
 import connect from "react-imvc/hoc/connect";
 import UserInfo from "./UserInfo";
 
-export type WithDataProps = {
+export interface WithDataProps {
   state: {
     showMenu: boolean
   },
@@ -22,7 +22,7 @@ const withData = connect(({ state, handlers }) => {
 
 export default withData(Menu);
 
-export type MenuProps = {
+export interface MenuProps {
   showMenu: boolean,
   onClose: (event: React.MouseEvent<HTMLElement, MouseEvent>) => void
 }
@@ -75,7 +75,7 @@ function Menu(props: MenuProps) {
   );
 }
 
-export type WithCurrentPathProps = {
+export interface WithCurrentPathProps {
   state: {
     location: {
       raw: string
@@ -91,7 +91,7 @@ const withCurrentPath = connect(({ state }: WithCurrentPathProps) => {
 
 const MenuItemWithCheck = withCurrentPath(MenuItem);
 
-export type MenuItemProps = {
+export interface MenuItemProps {
   current: string,
   to: string,
   [propName: string]: any

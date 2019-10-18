@@ -3,7 +3,7 @@ import { Link } from "react-imvc/component";
 import connect from 'react-imvc/hoc/connect'
 import { UserInfo as UserInfoInte } from "../shared/sharedInitialState";
 
-export type WithDataProps = {
+export interface WithDataProps {
   state: {
     location: {
       pattern: string,
@@ -28,7 +28,7 @@ const withData = connect(({ state, handlers }: WithDataProps) => {
 
 export default withData(UserInfo)
 
-export type UserInfoProps = {
+export interface UserInfoProps {
   location: {
     pattern: string,
     raw: string
@@ -53,7 +53,7 @@ function UserInfo({ location, userInfo, user, onLogout }: UserInfoProps) {
   );
 }
 
-export type LoginProps = {
+export interface LoginProps {
   if: boolean,
   redirect: string
 }
@@ -72,7 +72,7 @@ function Login(props: LoginProps) {
   );
 }
 
-export type LogoutProps = {
+export interface LogoutProps {
   if: boolean,
   onLogout: (event: React.MouseEvent<HTMLLIElement, MouseEvent>) => void
 }
@@ -91,7 +91,7 @@ function Logout(props: LogoutProps) {
   );
 }
 
-export type UserProps = {
+export interface UserProps {
   if: boolean
   info: UserInfoInte
 }

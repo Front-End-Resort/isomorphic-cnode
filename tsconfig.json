@@ -4,6 +4,7 @@
     "declaration": true,
     "sourceMap": false,
     "target": "es5",
+    "noEmit": true,
     "module": "commonjs",
     "skipLibCheck": true,
     "allowSyntheticDefaultImports": true,
@@ -20,8 +21,7 @@
     "lib": ["esnext", "dom.iterable", "dom"],
     "types": ["node"],
   },
-  "include": [
-    "src",
-    "markdwon.d.ts"
+  "exclude": [
+    "publish"
   ]
 }

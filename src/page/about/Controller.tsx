@@ -9,7 +9,7 @@ const initialState: State = {
   pageTitle: "关于"
 };
 
-export default class extends Controller<State, {}> {
+export default class About extends Controller<State, {}> {
   View = View;
   initialState = initialState
 }

@@ -17,7 +17,7 @@ class BaseController<S extends object, AS extends Actions<S & BaseState>> extend
     let userInfo = await this.getUserInfo();
     let isLogin = this.isLogin();
     let showAddButton = isLogin;
-
+    
     return {
       ...sharedInitialState,
       showAddButton,
@@ -155,7 +155,7 @@ class BaseController<S extends object, AS extends Actions<S & BaseState>> extend
     } = {}
   ) {
     let data = await super.fetch(url, options);
-    let { success, error_msg, ...userInfo } = data;
+    let { success, error_msg } = data;
 
     if (!success) {
       throw new Error(error_msg);

@@ -4,7 +4,7 @@ import * as _ from "../../shared/util";
 import * as Model from "./Model";
 import View from "./View";
 
-export default class extends Controller<Model.State, Omit<typeof Model, 'initialState'>> {
+export default class Home extends Controller<Model.State, Omit<typeof Model, 'initialState'>> {
   KeepAlive = true;
   View = View;
   Model = Model

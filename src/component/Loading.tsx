@@ -1,7 +1,7 @@
 import React from "react";
 import connect from 'react-imvc/hoc/connect'
 
-export type WithDataProps = {
+export interface WithDataProps {
   state: {
     loadingText: string
   }
@@ -15,7 +15,7 @@ const withData = connect(({ state }: WithDataProps) => {
 
 export default withData(Loading)
 
-export type LoadingProps = {
+export interface LoadingProps {
   content: string
 }
 

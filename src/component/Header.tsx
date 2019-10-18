@@ -4,7 +4,7 @@ import { Link } from "react-imvc/component";
 import connect from 'react-imvc/hoc/connect'
 import Menu from "./Menu";
 
-export type WithDataProps = {
+export interface WithDataProps {
   state: {
     fixedHeader: boolean,
     showMenu: boolean,
@@ -32,7 +32,7 @@ const withData = connect(({ state, handlers }: WithDataProps) => {
 
 export default withData(Header)
 
-export type HeaderProps = {
+export interface HeaderProps {
   fixedHeader: boolean,
   showMenu: boolean,
   pageTitle: boolean,
@@ -73,7 +73,7 @@ function Header(props: HeaderProps) {
   );
 }
 
-export type PageCoverProps = {
+export interface PageCoverProps {
   if: boolean,
   onClick: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void
 }
@@ -85,7 +85,7 @@ function PageCover(props: PageCoverProps) {
   return <div className="page-cover" onClick={props.onClick} />;
 }
 
-export type ToolbarProps = {
+export interface ToolbarProps {
   if: boolean,
   onClick: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void
 }
@@ -97,7 +97,7 @@ function Toolbar(props: ToolbarProps) {
   return <div className="toolbar-nav" onClick={props.onClick} />;
 }
 
-export type MessageProps = {
+export interface MessageProps {
   messageCount: number,
   showAddButton: boolean
 }

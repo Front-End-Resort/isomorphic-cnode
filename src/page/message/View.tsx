@@ -18,7 +18,7 @@ export interface ViewProps {
 }
 
 export default function View({ state, ctrl }: ViewProps) {
-  let { tab, hasRead, hasNotRead } = state;
+  let { tab, hasNotRead } = state;
   let hasReadClass = classnames({
     item: true,
     br: true,
@@ -121,7 +121,7 @@ export interface MessageInfo {
 }
 
 function MessageInfo(props: MessageInfo) {
-  let { id, title, author, type, reply, topic } = props;
+  let { author, type, reply, topic } = props;
   return (
     <div className="message markdown-body">
       <section className="user">
