@@ -8,13 +8,15 @@ export interface State {
   token: string
 }
 
+const initialState: State = {
+  pageTitle: "登录",
+  token: ""
+};
+
 class Login extends Controller<State, {}> {
   View = View;
 
-  initialState = {
-    pageTitle: "登录",
-    token: ""
-  };
+  initialState =  initialState
 
   async shouldComponentCreate() {
     let { context, location } = this;
@@ -70,7 +72,6 @@ export interface ViewProps {
 }
 
 function View({ ctrl }: ViewProps) {
-  // let { alertText, loadingText } = state;
   let { handleLogin } = ctrl;
 
   return (

@@ -1,3 +1,5 @@
+import { BaseState } from 'react-imvc'
+import { ExtraState } from '../../shared/sharedInitialState'
 import { MessageInfo } from './View'
 export type TAB = "hasNotRead" | "hasRead"
 export interface State {
@@ -14,7 +16,7 @@ export const initialState: State = {
   hasNotRead: []
 };
 
-export const COMPONENT_WILL_CREATE = <S extends State>(state: S, { hasRead, hasNotRead }: { hasRead: MessageInfo[], hasNotRead: MessageInfo[] }) => {
+export const COMPONENT_WILL_CREATE = (state: State & ExtraState & BaseState, { hasRead, hasNotRead }: { hasRead: MessageInfo[], hasNotRead: MessageInfo[] }) => {
   let tab: TAB = hasNotRead.length > 0 ? "hasNotRead" : "hasRead";
   state = CHANGE_TAB(state, tab);
   return {
@@ -24,7 +26,7 @@ export const COMPONENT_WILL_CREATE = <S extends State>(state: S, { hasRead, hasN
   };
 };
 
-export const CHANGE_TAB = <S extends State>(state: S, tab: TAB) => {
+export const CHANGE_TAB = (state: State & ExtraState & BaseState, tab: TAB) => {
   return {
     ...state,
     tab

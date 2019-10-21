@@ -1,26 +1,23 @@
 import React from "react";
+import { ViewPropsType } from 'react-imvc'
 import classnames from "classnames";
 import { Link } from "react-imvc/component";
 import Layout from "../../component/Layout";
 import { getLastTimeStr } from "../../shared/util";
 import { UserInfo, Message } from "../../shared/sharedInitialState";
-import { TYPE } from './Model'
+import { TYPE, State } from './Model'
 
-export interface ViewProps {
-  state: {
-    user: UserInfo,
-    type: TYPE
-  },
-  ctrl: {
-    handleTypeChange: (event: React.MouseEvent<HTMLLIElement, MouseEvent>) => void
-  }
+export interface Ctrl {
+  handleTypeChange: (event: React.MouseEvent<HTMLLIElement, MouseEvent>) => void
 }
 
-export default function View({ state, ctrl }: ViewProps) {
+export default function View({ state, ctrl }: ViewPropsType<State, {}, Ctrl>) {
   let { user, type } = state;
   let key = `recent_${type}` as keyof UserInfo
-  let currentData = user[key] || [];
 
+  if (!user) return <div></div>
+
+  let currentData = user[key] || [];
   return (
     <Layout>
       <UserInfoComponent user={user} />

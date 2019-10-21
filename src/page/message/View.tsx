@@ -1,23 +1,17 @@
 import React from "react";
+import { ViewPropsType } from 'react-imvc'
 import classnames from "classnames";
 import { Link } from "react-imvc/component";
 import Layout from "../../component/Layout";
 import * as _ from '../../shared/util'
-import { TAB } from './Model'
+import { State } from './Model'
 
-export interface ViewProps {
-  state: {
-    tab: TAB,
-    hasRead: MessageInfo[]
-    hasNotRead: MessageInfo[]
-  },
-  ctrl: {
-    handleTabChange: (event: React.MouseEvent<HTMLLIElement, MouseEvent>) => void
-    handleMarkAll: (event: React.MouseEvent<HTMLLIElement, MouseEvent>) => void
-  }
+export interface Ctrl {
+  handleTabChange: (event: React.MouseEvent<HTMLLIElement, MouseEvent>) => void
+  handleMarkAll: (event: React.MouseEvent<HTMLLIElement, MouseEvent>) => void
 }
 
-export default function View({ state, ctrl }: ViewProps) {
+export default function View({ state, ctrl }: ViewPropsType<State, {}, Ctrl>) {
   let { tab, hasNotRead } = state;
   let hasReadClass = classnames({
     item: true,

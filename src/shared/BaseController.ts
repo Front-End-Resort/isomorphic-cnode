@@ -2,12 +2,12 @@
 import Controller from "react-imvc/controller";
 import { Actions, BaseState } from 'react-imvc'
 import querystring from "querystring";
-import sharedInitialState, { ExtralState } from "./sharedInitialState";
+import sharedInitialState, { ExtraState } from "./sharedInitialState";
 import * as sharedActions from "./sharedActions";
 
-export type ExtralActions = typeof sharedActions
+export type ExtraActions = typeof sharedActions
 
-class BaseController<S extends object, AS extends Actions<S & BaseState>> extends Controller<S & ExtralState, AS & ExtralActions> {
+class BaseController<S extends object, AS extends Actions<S & ExtraState & BaseState>> extends Controller<S & ExtraState, AS & ExtraActions> {
   SSR = true
   preload = {
     main: "/css/main.css"
@@ -40,7 +40,7 @@ class BaseController<S extends object, AS extends Actions<S & BaseState>> extend
   /**
    * 数据重用后，将服务端的 userInfo 存入 context 里给其他页面使用
    */
-  stateDidReuse(state: S & ExtralState & BaseState) {
+  stateDidReuse(state: S & ExtraState & BaseState) {
     if (state.userInfo) {
       this.context.userInfo = state.userInfo;
     }

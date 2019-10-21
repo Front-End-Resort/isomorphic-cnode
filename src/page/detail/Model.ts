@@ -1,15 +1,15 @@
 /**
  * actions of method
  */
-import { WithBase } from 'react-imvc'
+import { BaseState } from 'react-imvc'
 import { UPDATE_HTML_TITLE } from "../../shared/sharedActions";
-import { ExtralState, UserInfo, Reply, Topic } from "../../shared/sharedInitialState";
+import { ExtraState, UserInfo, Reply, Topic } from "../../shared/sharedInitialState";
 import { markdown } from "markdown";
 
 export interface State {
   pageTitle: string,
   topic: Topic | null,
-  activeReplyId: number | string,
+  activeReplyId: number | string | null,
   replyOfOthers: Record<string, string>,
   replyOfTopic: string
 }
@@ -26,7 +26,7 @@ export const initialState = {
  * 
  * 首屏数据为 topic
  */
-export const COMPONENT_WILL_CREATE = <S extends WithBase<State & ExtralState>>(state: S, { topic }: { topic: Topic | null }) => {
+export const COMPONENT_WILL_CREATE = (state: State & ExtraState & BaseState, { topic }: { topic: Topic | null }) => {
   if (topic) {
     state = UPDATE_HTML_TITLE(state, topic.title)
   }
@@ -42,7 +42,7 @@ export const COMPONENT_WILL_CREATE = <S extends WithBase<State & ExtralState>>(s
  * 将当前 replyId 设置为 active 并确保 replyOfOthers[replyId] 不为 undefined
  * 如果再次点击，则收起表单
  */
-export const TOGGLE_REPLY_FORM = <S extends WithBase<State & ExtralState>>(state: S, { activeReplyId }: { activeReplyId: string }) => {
+export const TOGGLE_REPLY_FORM = (state: State & ExtraState & BaseState, { activeReplyId }: { activeReplyId: string }) => {
   if (activeReplyId === state.activeReplyId) {
     return HIDE_REPLY_FORM(state);
   } else {
@@ -50,7 +50,7 @@ export const TOGGLE_REPLY_FORM = <S extends WithBase<State & ExtralState>>(state
   }
 };
 
-export const SHOW_REPLY_FORM = <S extends WithBase<State & ExtralState>>(state: S, activeReplyId: string) => {
+export const SHOW_REPLY_FORM = (state: State & ExtraState & BaseState, activeReplyId: string) => {
   let replyOfOthers = state.replyOfOthers;
 
   if (!replyOfOthers[activeReplyId]) {
@@ -66,14 +66,14 @@ export const SHOW_REPLY_FORM = <S extends WithBase<State & ExtralState>>(state: 
   };
 };
 
-export const HIDE_REPLY_FORM = <S extends WithBase<State & ExtralState>>(state: S) => {
+export const HIDE_REPLY_FORM = (state: State & ExtraState & BaseState) => {
   return {
     ...state,
     activeReplyId: null
   };
 };
 
-export const LIKE_REPLY = <S extends WithBase<State & ExtralState>>(state: S, { action, replyId }: { action: string, replyId: string }) => {
+export const LIKE_REPLY = (state: State & ExtraState & BaseState, { action, replyId }: { action: string, replyId: string }) => {
   let { topic, userInfo } = state;
   let userId: string
   if (userInfo) {
@@ -104,7 +104,7 @@ export const LIKE_REPLY = <S extends WithBase<State & ExtralState>>(state: S, { 
   };
 };
 
-export const REPLY_TO_TOPIC = <S extends WithBase<State & ExtralState>>(state: S, payload: { replyId: string, content: string }) => {
+export const REPLY_TO_TOPIC = (state: State & ExtraState & BaseState, payload: { replyId: string, content: string }) => {
   state = ADD_REPLY(state, payload);
   return {
     ...state,
@@ -112,7 +112,7 @@ export const REPLY_TO_TOPIC = <S extends WithBase<State & ExtralState>>(state: S
   };
 };
 
-export const REPLY_TO_OTHER = <S extends WithBase<State & ExtralState>>(state: S, { replyId, newReplyId, content }: { replyId: string, newReplyId: string, content: string }) => {
+export const REPLY_TO_OTHER = (state: State & ExtraState & BaseState, { replyId, newReplyId, content }: { replyId: string, newReplyId: string, content: string }) => {
   state = ADD_REPLY(state, {
     replyId: newReplyId,
     content: content
@@ -129,7 +129,7 @@ export const REPLY_TO_OTHER = <S extends WithBase<State & ExtralState>>(state: S
   };
 };
 
-export const ADD_REPLY = <S extends WithBase<State & ExtralState>>(state: S, { replyId, content }: { replyId: string, content: string }) => {
+export const ADD_REPLY = (state: State & ExtraState & BaseState, { replyId, content }: { replyId: string, content: string }) => {
   let { userInfo, topic } = state;
   let replyItem = createReplyItem({ replyId, content, userInfo: userInfo as UserInfo });
 

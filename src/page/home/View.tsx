@@ -1,16 +1,12 @@
 import React from "react";
+import { ViewPropsType } from 'react-imvc'
 import { Link } from "react-imvc/component";
 import { purify } from "../../shared/hoc";
 import Layout from "../../component/Layout";
 import * as _ from "../../shared/util";
+import { State } from './Model'
 
-export type ViewProps = {
-  state: {
-    topics: TopicProps[]
-  }
-}
-
-export default function View({ state }: ViewProps) {
+export default function View({ state }: ViewPropsType<State, {}, {}>) {
   return (
     <Layout>
       <section id="page">

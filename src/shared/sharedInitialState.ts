@@ -48,7 +48,7 @@ export interface UserInfo {
   recent_topics: Topic[],
   score: number
 }
-export type ExtralState = {
+export type ExtraState = {
   html?: {
     title?: string
     description?: string
@@ -65,7 +65,7 @@ export type ExtralState = {
   isLogin?: boolean
 }
 
-const sharedInitialState: ExtralState = {
+const sharedInitialState: ExtraState = {
   // html config
   html: {
     title: "isomorphic-cnode",

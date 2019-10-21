@@ -2,8 +2,8 @@
  * Model
  */
 import { UPDATE_HTML_TITLE } from '../../shared/sharedActions'
-import { WithBase } from 'react-imvc'
-import { ExtralState, UserInfo, Message } from "../../shared/sharedInitialState";
+import { BaseState } from 'react-imvc'
+import { ExtraState, UserInfo, Message } from "../../shared/sharedInitialState";
 
 export type TYPE = 'replies' | 'topics'
 
@@ -21,7 +21,7 @@ export const initialState: State = {
   currentData: []
 };
 
-export const COMPONENT_WILL_CREATE = <S extends WithBase<State & ExtralState>>(state: S, { user }: { user: UserInfo }) => {
+export const COMPONENT_WILL_CREATE = (state: State & ExtraState & BaseState, { user }: { user: UserInfo }) => {
   state = UPDATE_HTML_TITLE(state, user.loginname);
   return {
     ...state,
@@ -29,7 +29,7 @@ export const COMPONENT_WILL_CREATE = <S extends WithBase<State & ExtralState>>(s
   };
 };
 
-export const CHANGE_TYPE = <S extends WithBase<State & ExtralState>>(state: S, type: string) => {
+export const CHANGE_TYPE = (state: State & ExtraState & BaseState, type: TYPE) => {
   return {
     ...state,
     type

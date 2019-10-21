@@ -1,8 +1,9 @@
+import { M2AS } from 'react-imvc'
 import Controller from "../../shared/BaseController";
 import * as Model from "./Model";
 import View from "./View";
 
-export default class Message extends Controller<Model.State, Omit<typeof Model, 'initialState'>> {
+export default class Message extends Controller<Model.State, M2AS<typeof Model>> {
   KeepAlive = true;
   NeedLogin = true;
   Model = Model;

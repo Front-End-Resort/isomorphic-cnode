@@ -6,7 +6,7 @@ import { ViewPropsType, BaseState  } from 'react-imvc'
 import { purify, staticify } from '../../shared/hoc'
 import * as _ from "../../shared/util";
 import Layout from "../../component/Layout";
-import { Reply, Topic, ExtralState } from "../../shared/sharedInitialState";
+import { Reply, Topic, ExtraState } from "../../shared/sharedInitialState";
 import { State } from './Model'
 
 export type Ctrl = {
@@ -16,7 +16,7 @@ export type Ctrl = {
   handleReplyTopic: (event: React.MouseEvent<HTMLSpanElement, MouseEvent>) => void;
 }
 
-export default function View({ state, ctrl }: ViewPropsType<State & ExtralState & BaseState, {}, Ctrl>) {
+export default function View({ state, ctrl }: ViewPropsType<State & ExtraState & BaseState, {}, Ctrl>) {
   let { isLogin, topic, activeReplyId, replyOfOthers } = state;
 
   let ctrl1 = useCtrl()
@@ -154,7 +154,7 @@ function ReplyForm(props: ReplyFormProps) {
 export interface TopicReplyListProps {
   replies: Reply[]
   replyOfOthers: Record<string, any>
-  activeReplyId: string | number
+  activeReplyId: string | number | null
   isLogin: boolean | undefined
   ctrl: {
     handleLikeReply: (event: React.MouseEvent<HTMLSpanElement, MouseEvent>) => void;
