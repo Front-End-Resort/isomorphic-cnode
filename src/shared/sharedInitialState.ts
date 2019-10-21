@@ -1,7 +1,7 @@
 /**
  * shared initial state
  */
-
+import { BaseState } from 'react-imvc'
 export interface Message {
   id: string,
   author: {
@@ -48,7 +48,7 @@ export interface UserInfo {
   recent_topics: Topic[],
   score: number
 }
-export type ExtraState = {
+export type ExtraState = BaseState & {
   html?: {
     title?: string
     description?: string
@@ -65,7 +65,7 @@ export type ExtraState = {
   isLogin?: boolean
 }
 
-const sharedInitialState: ExtraState = {
+const sharedInitialState = {
   // html config
   html: {
     title: "isomorphic-cnode",

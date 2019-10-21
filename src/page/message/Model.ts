@@ -1,22 +1,22 @@
-import { BaseState } from 'react-imvc'
+import { ActionWithPayload } from 'react-imvc'
 import { ExtraState } from '../../shared/sharedInitialState'
 import { MessageInfo } from './View'
 export type TAB = "hasNotRead" | "hasRead"
-export interface State {
+export type State = ExtraState & {
   pageTitle: string,
   tab: TAB,
   hasRead: MessageInfo[],
   hasNotRead: MessageInfo[]
 }
 
-export const initialState: State = {
+export const initialState = {
   pageTitle: "消息",
   tab: "hasNotRead",
   hasRead: [],
   hasNotRead: []
 };
 
-export const COMPONENT_WILL_CREATE = (state: State & ExtraState & BaseState, { hasRead, hasNotRead }: { hasRead: MessageInfo[], hasNotRead: MessageInfo[] }) => {
+export const COMPONENT_WILL_CREATE: ActionWithPayload<State, { hasRead: MessageInfo[], hasNotRead: MessageInfo[] }> = (state, { hasRead, hasNotRead }) => {
   let tab: TAB = hasNotRead.length > 0 ? "hasNotRead" : "hasRead";
   state = CHANGE_TAB(state, tab);
   return {
@@ -26,7 +26,7 @@ export const COMPONENT_WILL_CREATE = (state: State & ExtraState & BaseState, { h
   };
 };
 
-export const CHANGE_TAB = (state: State & ExtraState & BaseState, tab: TAB) => {
+export const CHANGE_TAB: ActionWithPayload<State, TAB> = (state, tab) => {
   return {
     ...state,
     tab

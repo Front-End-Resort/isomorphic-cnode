@@ -1,9 +1,9 @@
 import { M2AS } from 'react-imvc'
 import Controller from "../../shared/BaseController";
-import View from "./View";
+import View, { Ctrl } from "./View";
 import * as Model from "./Model";
 
-export default class Add extends Controller<Model.State, M2AS<typeof Model>> {
+export default class Add extends Controller<Model.State, M2AS<typeof Model>> implements Ctrl {
   KeepAlive = true;
   NeedLogin = true;
   View = View;

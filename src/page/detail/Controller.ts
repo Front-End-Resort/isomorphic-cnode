@@ -1,12 +1,12 @@
 import { M2AS } from 'react-imvc'
 import Controller from "../../shared/BaseController"
-import View from "./View"
+import View, { Ctrl } from "./View"
 import * as Model from "./Model"
 import * as _ from "../../shared/util"
 
 const replySuffix = `\n来自 [isomorphic-cnode](https://lucifier129.github.io/isomorphic-cnode/publish/static/)`
 
-class Detail extends Controller<Model.State, M2AS<typeof Model>> {
+class Detail extends Controller<Model.State, M2AS<typeof Model>> implements Ctrl {
   KeepAlive = true
   View = View
   Model = Model

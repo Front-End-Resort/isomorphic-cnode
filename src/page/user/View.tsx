@@ -1,5 +1,5 @@
 import React from "react";
-import { ViewPropsType } from 'react-imvc'
+import { ViewProps } from 'react-imvc'
 import classnames from "classnames";
 import { Link } from "react-imvc/component";
 import Layout from "../../component/Layout";
@@ -11,7 +11,7 @@ export interface Ctrl {
   handleTypeChange: (event: React.MouseEvent<HTMLLIElement, MouseEvent>) => void
 }
 
-export default function View({ state, ctrl }: ViewPropsType<State, {}, Ctrl>) {
+export default function View({ state, ctrl }: ViewProps<State, Ctrl>) {
   let { user, type } = state;
   let key = `recent_${type}` as keyof UserInfo
 

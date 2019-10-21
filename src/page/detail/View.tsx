@@ -2,11 +2,11 @@ import React from "react";
 import classnames from "classnames";
 import { Link, Input } from "react-imvc/component";
 import { useCtrl, useModel, useModelActions } from 'react-imvc/hook'
-import { ViewPropsType, BaseState  } from 'react-imvc'
+import { ViewProps, BaseState  } from 'react-imvc'
 import { purify, staticify } from '../../shared/hoc'
 import * as _ from "../../shared/util";
 import Layout from "../../component/Layout";
-import { Reply, Topic, ExtraState } from "../../shared/sharedInitialState";
+import { Reply, Topic } from "../../shared/sharedInitialState";
 import { State } from './Model'
 
 export type Ctrl = {
@@ -16,7 +16,7 @@ export type Ctrl = {
   handleReplyTopic: (event: React.MouseEvent<HTMLSpanElement, MouseEvent>) => void;
 }
 
-export default function View({ state, ctrl }: ViewPropsType<State & ExtraState & BaseState, {}, Ctrl>) {
+export default function View({ state, ctrl }: ViewProps<State, Ctrl>) {
   let { isLogin, topic, activeReplyId, replyOfOthers } = state;
 
   let ctrl1 = useCtrl()

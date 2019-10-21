@@ -1,4 +1,7 @@
-export type State = {
+
+import { ExtraState } from '../../shared/sharedInitialState'
+
+export type State = ExtraState & {
     pageTitle: string,
     showAddButton: boolean,
     tab: string,
@@ -7,7 +10,7 @@ export type State = {
     errorTypeList: string[],
 }
 
-export const initialState: State = {
+export const initialState = {
     pageTitle: "添加",
     showAddButton: false,
     tab: 'share',

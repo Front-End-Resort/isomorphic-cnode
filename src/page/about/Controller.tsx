@@ -1,11 +1,12 @@
 import Controller from "../../shared/BaseController";
+import { ExtraState } from '../../shared/sharedInitialState'
 import React from "react";
 import Layout from "../../component/Layout";
 
-export type State = {
+export type State = ExtraState &  {
   pageTitle: string
 }
-const initialState: State = {
+const initialState = {
   pageTitle: "关于"
 };
 

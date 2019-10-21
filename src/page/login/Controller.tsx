@@ -1,25 +1,26 @@
 import React from "react";
+import { ViewProps } from 'react-imvc'
 import { Input } from "react-imvc/component";
 import Layout from "../../component/Layout";
 import Controller from "../../shared/BaseController";
+import { ExtraState } from '../../shared/sharedInitialState'
 
-export interface State {
+export type State = ExtraState & {
   pageTitle: string
   token: string
 }
 
-const initialState: State = {
+const initialState = {
   pageTitle: "登录",
   token: ""
 };
 
 class Login extends Controller<State, {}> {
-  View = View;
-
-  initialState =  initialState
+  View = View
+  initialState = initialState
 
   async shouldComponentCreate() {
-    let { context, location } = this;
+    let { context, location } = this
     // 如果已经登陆，重定向离开
     if (this.isLogin()) {
       let { userInfo } = context;
@@ -61,17 +62,11 @@ class Login extends Controller<State, {}> {
 
 export default Login
 
-export interface ViewProps {
-  state: {
-    alertText: string
-    loadingText: string
-  },
-  ctrl: {
-    handleLogin: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void
-  }
+export interface Ctrl {
+  handleLogin: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void
 }
 
-function View({ ctrl }: ViewProps) {
+function View({ ctrl }: ViewProps<State, Ctrl>) {
   let { handleLogin } = ctrl;
 
   return (

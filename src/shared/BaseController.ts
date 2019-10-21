@@ -1,13 +1,13 @@
 // base controller class
 import Controller from "react-imvc/controller";
-import { Actions, BaseState } from 'react-imvc'
+import { Actions, BaseState, BaseActions } from 'react-imvc'
 import querystring from "querystring";
 import sharedInitialState, { ExtraState } from "./sharedInitialState";
 import * as sharedActions from "./sharedActions";
 
-export type ExtraActions = typeof sharedActions
+export type ExtraActions = typeof sharedActions & BaseActions
 
-class BaseController<S extends object, AS extends Actions<S & ExtraState & BaseState>> extends Controller<S & ExtraState, AS & ExtraActions> {
+class BaseController<S extends object, AS extends Actions<S & ExtraState>> extends Controller<S & ExtraState, AS & ExtraActions> {
   SSR = true
   preload = {
     main: "/css/main.css"
