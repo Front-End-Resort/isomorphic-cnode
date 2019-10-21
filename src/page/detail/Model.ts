@@ -9,7 +9,7 @@ import { markdown } from "markdown";
 export interface State {
   pageTitle: string,
   topic: Topic | null,
-  activeReplyId: number | string | null,
+  activeReplyId: number | string,
   replyOfOthers: Record<string, string>,
   replyOfTopic: string
 }

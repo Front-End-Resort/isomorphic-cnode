@@ -1,15 +1,15 @@
 import React from "react";
+import { ViewPropsType } from 'react-imvc'
 import { Input } from "react-imvc/component";
 import Layout from "../../component/Layout";
 
-export type ViewProps = {
-  state: {},
-  ctrl: {
-    handlePublish: (...any: any[]) => any
-  }
+import { State } from './Model'
+
+export type Ctrl = {
+  handlePublish: (...any: any[]) => any
 }
 
-export default function View({ ctrl }: ViewProps) {
+export default function View({ ctrl }: ViewPropsType<State, {}, Ctrl>) {
   return (
     <Layout>
       <div className="add-container">

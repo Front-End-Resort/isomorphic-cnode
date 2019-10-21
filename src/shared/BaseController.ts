@@ -7,7 +7,7 @@ import * as sharedActions from "./sharedActions";
 
 export type ExtralActions = typeof sharedActions
 
-class BaseController<S extends object, AS extends Actions<S & BaseState>> extends Controller<S, AS, ExtralState, ExtralActions> {
+class BaseController<S extends object, AS extends Actions<S & BaseState>> extends Controller<S & ExtralState, AS & ExtralActions> {
   SSR = true
   preload = {
     main: "/css/main.css"

@@ -2,27 +2,21 @@ import React from "react";
 import classnames from "classnames";
 import { Link, Input } from "react-imvc/component";
 import { useCtrl, useModel, useModelActions } from 'react-imvc/hook'
+import { ViewPropsType, BaseState  } from 'react-imvc'
 import { purify, staticify } from '../../shared/hoc'
 import * as _ from "../../shared/util";
 import Layout from "../../component/Layout";
-import { Reply, Topic } from "../../shared/sharedInitialState";
+import { Reply, Topic, ExtralState } from "../../shared/sharedInitialState";
+import { State } from './Model'
 
-export type ViewProps = {
-  state: {
-    isLogin: boolean,
-    topic: Topic,
-    activeReplyId: string,
-    replyOfOthers: any
-  },
-  ctrl: {
-    handleLikeReply: (event: React.MouseEvent<HTMLSpanElement, MouseEvent>) => void;
-    handleToggleReplyForm: (event: React.MouseEvent<HTMLSpanElement, MouseEvent>) => void;
-    handleReplyOther: (event: React.MouseEvent<HTMLSpanElement, MouseEvent>) => void;
-    handleReplyTopic: (event: React.MouseEvent<HTMLSpanElement, MouseEvent>) => void;
-  }
+export type Ctrl = {
+  handleLikeReply: (event: React.MouseEvent<HTMLSpanElement, MouseEvent>) => void;
+  handleToggleReplyForm: (event: React.MouseEvent<HTMLSpanElement, MouseEvent>) => void;
+  handleReplyOther: (event: React.MouseEvent<HTMLSpanElement, MouseEvent>) => void;
+  handleReplyTopic: (event: React.MouseEvent<HTMLSpanElement, MouseEvent>) => void;
 }
 
-export default function View({ state, ctrl }: ViewProps) {
+export default function View({ state, ctrl }: ViewPropsType<State & ExtralState & BaseState, {}, Ctrl>) {
   let { isLogin, topic, activeReplyId, replyOfOthers } = state;
 
   let ctrl1 = useCtrl()
@@ -126,7 +120,7 @@ function TopicAuthorInfo({ topic }: TopicAuthorInfoProps) {
 }
 
 export interface ReplyFormProps {
-  if: boolean
+  if: boolean | undefined
   id: string | number
   name: string
   value?: string
@@ -160,8 +154,8 @@ function ReplyForm(props: ReplyFormProps) {
 export interface TopicReplyListProps {
   replies: Reply[]
   replyOfOthers: Record<string, any>
-  activeReplyId: string
-  isLogin: boolean
+  activeReplyId: string | number
+  isLogin: boolean | undefined
   ctrl: {
     handleLikeReply: (event: React.MouseEvent<HTMLSpanElement, MouseEvent>) => void;
     handleToggleReplyForm: (event: React.MouseEvent<HTMLSpanElement, MouseEvent>) => void;
@@ -178,7 +172,7 @@ function TopicReplyList({ replies, replyOfOthers, activeReplyId, isLogin, ctrl }
             key={reply.id}
             reply={reply}
             replyContent={replyOfOthers[reply.id]}
-            showReplyForm={isLogin && activeReplyId === reply.id}
+            showReplyForm={!!isLogin && activeReplyId === reply.id}
             ctrl={ctrl}
           />
         ))}
