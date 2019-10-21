@@ -16,7 +16,8 @@ export const initialState = {
   hasNotRead: []
 }
 
-export const COMPONENT_WILL_CREATE: ActionWithPayload<State, { hasRead: MessageInfo[], hasNotRead: MessageInfo[] }> = (state, { hasRead, hasNotRead }) => {
+export interface ComponentWillCreatePayload { hasRead: MessageInfo[], hasNotRead: MessageInfo[] }
+export const COMPONENT_WILL_CREATE: ActionWithPayload<State, ComponentWillCreatePayload> = (state, { hasRead, hasNotRead }) => {
   let tab: TAB = hasNotRead.length > 0 ? "hasNotRead" : "hasRead"
   state = CHANGE_TAB(state, tab)
   return {

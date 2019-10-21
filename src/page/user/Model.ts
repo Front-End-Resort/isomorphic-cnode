@@ -21,7 +21,8 @@ export const initialState = {
   currentData: []
 }
 
-export const COMPONENT_WILL_CREATE: ActionWithPayload<State, { user: UserInfo }> = (state, { user }) => {
+export interface ComponentWillCreate { user: UserInfo }
+export const COMPONENT_WILL_CREATE: ActionWithPayload<State, ComponentWillCreate> = (state, { user }) => {
   state = UPDATE_HTML_TITLE(state, user.loginname)
   return {
     ...state,
