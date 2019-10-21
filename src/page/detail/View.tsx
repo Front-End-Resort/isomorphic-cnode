@@ -2,7 +2,7 @@ import React from "react"
 import classnames from "classnames"
 import { Link, Input } from "react-imvc/component"
 import { useCtrl, useModel, useModelActions } from 'react-imvc/hook'
-import { ViewProps, BaseState  } from 'react-imvc'
+import { ViewProps } from 'react-imvc'
 import { purify, staticify } from '../../shared/hoc'
 import * as _ from "../../shared/util"
 import Layout from "../../component/Layout"
