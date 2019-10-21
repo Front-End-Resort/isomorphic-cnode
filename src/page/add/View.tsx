@@ -1,7 +1,7 @@
-import React from "react";
+import React from "react"
 import { ViewProps } from 'react-imvc'
-import { Input } from "react-imvc/component";
-import Layout from "../../component/Layout";
+import { Input } from "react-imvc/component"
+import Layout from "../../component/Layout"
 
 import { State } from './Model'
 
@@ -37,7 +37,7 @@ export default function View({ ctrl }: ViewProps<State, Ctrl>) {
         />
       </div>
     </Layout>
-  );
+  )
 }
 
 const tabList = [
@@ -53,7 +53,7 @@ const tabList = [
     type: "job",
     text: "招聘"
   }
-];
+]
 
 function Select() {
   return (
@@ -64,5 +64,5 @@ function Select() {
         </option>
       ))}
     </Input>
-  );
+  )
 }

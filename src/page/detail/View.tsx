@@ -1,23 +1,23 @@
-import React from "react";
-import classnames from "classnames";
-import { Link, Input } from "react-imvc/component";
+import React from "react"
+import classnames from "classnames"
+import { Link, Input } from "react-imvc/component"
 import { useCtrl, useModel, useModelActions } from 'react-imvc/hook'
 import { ViewProps, BaseState  } from 'react-imvc'
 import { purify, staticify } from '../../shared/hoc'
-import * as _ from "../../shared/util";
-import Layout from "../../component/Layout";
-import { Reply, Topic } from "../../shared/sharedInitialState";
+import * as _ from "../../shared/util"
+import Layout from "../../component/Layout"
+import { Reply, Topic } from "../../shared/sharedInitialState"
 import { State } from './Model'
 
 export type Ctrl = {
-  handleLikeReply: (event: React.MouseEvent<HTMLSpanElement, MouseEvent>) => void;
-  handleToggleReplyForm: (event: React.MouseEvent<HTMLSpanElement, MouseEvent>) => void;
-  handleReplyOther: (event: React.MouseEvent<HTMLSpanElement, MouseEvent>) => void;
-  handleReplyTopic: (event: React.MouseEvent<HTMLSpanElement, MouseEvent>) => void;
+  handleLikeReply: (event: React.MouseEvent<HTMLSpanElement, MouseEvent>) => void
+  handleToggleReplyForm: (event: React.MouseEvent<HTMLSpanElement, MouseEvent>) => void
+  handleReplyOther: (event: React.MouseEvent<HTMLSpanElement, MouseEvent>) => void
+  handleReplyTopic: (event: React.MouseEvent<HTMLSpanElement, MouseEvent>) => void
 }
 
 export default function View({ state, ctrl }: ViewProps<State, Ctrl>) {
-  let { isLogin, topic, activeReplyId, replyOfOthers } = state;
+  let { isLogin, topic, activeReplyId, replyOfOthers } = state
 
   let ctrl1 = useCtrl()
   let model = useModel()
@@ -28,9 +28,9 @@ export default function View({ state, ctrl }: ViewProps<State, Ctrl>) {
   if (!topic) {
     return (
       <Layout>
-        <NoTopic />;
+        <NoTopic />
       </Layout>
-    );
+    )
   }
 
   return (
@@ -55,7 +55,7 @@ export default function View({ state, ctrl }: ViewProps<State, Ctrl>) {
         />
       </div>
     </Layout>
-  );
+  )
 }
 
 const StaticTopicContent = staticify()(TopicContent)
@@ -66,7 +66,7 @@ function TopicContent({ content }: { content: string }) {
       className="markdown-body topic-content"
       dangerouslySetInnerHTML={{ __html: content }}
     />
-  );
+  )
 }
 
 function TopicReplyCount({ count }: { count: number }) {
@@ -74,18 +74,18 @@ function TopicReplyCount({ count }: { count: number }) {
     <h3 className="topic-reply">
       <strong>{count}</strong> 回复
     </h3>
-  );
+  )
 }
 
 function NoTopic() {
   return (
     <div style={{ height: "100%", background: "#fff" }}>
       <div className="no-data">
-        <i className="iconfont icon-empty">&#xe60a;</i>
+        <i className="iconfont icon-empty">&#xe60a</i>
         该话题不存在!
       </div>
     </div>
-  );
+  )
 }
 
 export interface TopicAuthorInfoProps {
@@ -96,7 +96,7 @@ function TopicAuthorInfo({ topic }: TopicAuthorInfoProps) {
   let tagClass = classnames({
     tag: true,
     [_.getTabClassName(topic.tab, topic.good, topic.top)]: true
-  });
+  })
   return (
     <section className="author-info">
       <Link
@@ -116,7 +116,7 @@ function TopicAuthorInfo({ topic }: TopicAuthorInfoProps) {
         <span className="name">{topic.visit_count}次浏览</span>
       </div>
     </section>
-  );
+  )
 }
 
 export interface ReplyFormProps {
@@ -129,10 +129,10 @@ export interface ReplyFormProps {
 
 function ReplyForm(props: ReplyFormProps) {
   if (!props.if) {
-    return null;
+    return null
   }
 
-  let { id, name, onSubmit } = props;
+  let { id, name, onSubmit } = props
 
   return (
     <section className="reply">
@@ -148,7 +148,7 @@ function ReplyForm(props: ReplyFormProps) {
         确定
       </button>
     </section>
-  );
+  )
 }
 
 export interface TopicReplyListProps {
@@ -157,9 +157,9 @@ export interface TopicReplyListProps {
   activeReplyId: string | number | null
   isLogin: boolean | undefined
   ctrl: {
-    handleLikeReply: (event: React.MouseEvent<HTMLSpanElement, MouseEvent>) => void;
-    handleToggleReplyForm: (event: React.MouseEvent<HTMLSpanElement, MouseEvent>) => void;
-    handleReplyOther: (event: React.MouseEvent<HTMLSpanElement, MouseEvent>) => void;
+    handleLikeReply: (event: React.MouseEvent<HTMLSpanElement, MouseEvent>) => void
+    handleToggleReplyForm: (event: React.MouseEvent<HTMLSpanElement, MouseEvent>) => void
+    handleReplyOther: (event: React.MouseEvent<HTMLSpanElement, MouseEvent>) => void
   }
 }
 
@@ -178,7 +178,7 @@ function TopicReplyList({ replies, replyOfOthers, activeReplyId, isLogin, ctrl }
         ))}
       </ul>
     </section>
-  );
+  )
 }
 
 const PureReplyItem = purify()(ReplyItem)
@@ -237,7 +237,7 @@ function ReplyItem({ reply, replyContent, ctrl, showReplyForm }: ReplyItemProps)
         onSubmit={ctrl.handleReplyOther}
       />
     </li>
-  );
+  )
 }
 
 export interface LikeIconProps {
@@ -251,12 +251,12 @@ function LikeIcon({ id, like, onClick }: LikeIconProps) {
     iconfont: true,
     icon: true,
     uped: like
-  });
+  })
   return (
     <span className={className} onClick={onClick} data-id={id}>
-      &#xe608;
+      &#xe608
     </span>
-  );
+  )
 }
 
 export interface ShowFormButtonProps {
@@ -267,7 +267,7 @@ export interface ShowFormButtonProps {
 function ShowFormButton({ id, onClick }: ShowFormButtonProps) {
   return (
     <span className="iconfont icon" onClick={onClick} data-id={id}>
-      &#xe609;
+      &#xe609
     </span>
-  );
+  )
 }

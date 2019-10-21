@@ -88,6 +88,6 @@ const sharedInitialState = {
   alertText: "",
   // laoding 话术
   loadingText: ""
-};
+}
 
 export default sharedInitialState

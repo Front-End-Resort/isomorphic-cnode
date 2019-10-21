@@ -14,21 +14,21 @@ export const initialState = {
   tab: "hasNotRead",
   hasRead: [],
   hasNotRead: []
-};
+}
 
 export const COMPONENT_WILL_CREATE: ActionWithPayload<State, { hasRead: MessageInfo[], hasNotRead: MessageInfo[] }> = (state, { hasRead, hasNotRead }) => {
-  let tab: TAB = hasNotRead.length > 0 ? "hasNotRead" : "hasRead";
-  state = CHANGE_TAB(state, tab);
+  let tab: TAB = hasNotRead.length > 0 ? "hasNotRead" : "hasRead"
+  state = CHANGE_TAB(state, tab)
   return {
     ...state,
     hasRead,
     hasNotRead
-  };
-};
+  }
+}
 
 export const CHANGE_TAB: ActionWithPayload<State, TAB> = (state, tab) => {
   return {
     ...state,
     tab
-  };
-};
+  }
+}

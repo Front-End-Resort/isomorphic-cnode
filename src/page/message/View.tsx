@@ -1,8 +1,8 @@
-import React from "react";
+import React from "react"
 import { ViewProps } from 'react-imvc'
-import classnames from "classnames";
-import { Link } from "react-imvc/component";
-import Layout from "../../component/Layout";
+import classnames from "classnames"
+import { Link } from "react-imvc/component"
+import Layout from "../../component/Layout"
 import * as _ from '../../shared/util'
 import { State } from './Model'
 
@@ -12,17 +12,17 @@ export interface Ctrl {
 }
 
 export default function View({ state, ctrl }: ViewProps<State, Ctrl>) {
-  let { tab, hasNotRead } = state;
+  let { tab, hasNotRead } = state
   let hasReadClass = classnames({
     item: true,
     br: true,
     selected: tab === "hasRead"
-  });
+  })
   let hasNotReadClass = classnames({
     item: true,
     br: true,
     selected: tab === "hasNotRead"
-  });
+  })
   return (
     <Layout>
       <div className="page">
@@ -42,7 +42,7 @@ export default function View({ state, ctrl }: ViewProps<State, Ctrl>) {
             未读消息
             {hasNotRead.length > 0 && (
               <i className="iconfont read" onClick={ctrl.handleMarkAll}>
-                &#xe60c;
+                &#xe60c
               </i>
             )}
           </li>
@@ -50,7 +50,7 @@ export default function View({ state, ctrl }: ViewProps<State, Ctrl>) {
         <MessageContent list={state[tab]} />
       </div>
     </Layout>
-  );
+  )
 }
 
 export interface MessageContentProps {
@@ -59,18 +59,18 @@ export interface MessageContentProps {
 
 function MessageContent({ list }: MessageContentProps) {
   if (!list || !list.length) {
-    return <Empty />;
+    return <Empty />
   }
-  return <div>{list.map(data => <MessageInfo {...data} key={data.id} />)}</div>;
+  return <div>{list.map(data => <MessageInfo {...data} key={data.id} />)}</div>
 }
 
 function Empty() {
   return (
     <div className="no-data">
-      <i className="iconfont icon-empty">&#xe60a;</i>
+      <i className="iconfont icon-empty">&#xe60a</i>
       暂无数据!
     </div>
-  );
+  )
 }
 
 export interface Reply {
@@ -115,7 +115,7 @@ export interface MessageInfo {
 }
 
 function MessageInfo(props: MessageInfo) {
-  let { author, type, reply, topic } = props;
+  let { author, type, reply, topic } = props
   return (
     <div className="message markdown-body">
       <section className="user">
@@ -146,5 +146,5 @@ function MessageInfo(props: MessageInfo) {
         话题：{topic.title}
       </Link>
     </div>
-  );
+  )
 }

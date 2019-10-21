@@ -1,9 +1,9 @@
-import React from "react";
+import React from "react"
 import { ViewProps } from 'react-imvc'
-import { Link } from "react-imvc/component";
-import { purify } from "../../shared/hoc";
-import Layout from "../../component/Layout";
-import * as _ from "../../shared/util";
+import { Link } from "react-imvc/component"
+import { purify } from "../../shared/hoc"
+import Layout from "../../component/Layout"
+import * as _ from "../../shared/util"
 import { State } from './Model'
 
 export default function View({ state }: ViewProps<State, {}>) {
@@ -15,10 +15,10 @@ export default function View({ state }: ViewProps<State, {}>) {
         </ul>
       </section>
     </Layout>
-  );
+  )
 }
 
-const PureTopic = purify()(Topic);
+const PureTopic = purify()(Topic)
 
 export interface TopicProps {
   id: string,
@@ -48,7 +48,7 @@ function Topic(props: TopicProps) {
     create_at,
     last_reply_at,
     visit_count
-  } = props;
+  } = props
   return (
     <Link as="li" prefetch to={`/topic/${id}`}>
       <h3
@@ -75,5 +75,5 @@ function Topic(props: TopicProps) {
         </div>
       </div>
     </Link>
-  );
+  )
 }

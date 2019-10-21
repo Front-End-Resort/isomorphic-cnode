@@ -1,7 +1,7 @@
-import React from "react";
-import { Link } from "react-imvc/component";
+import React from "react"
+import { Link } from "react-imvc/component"
 import connect from 'react-imvc/hoc/connect'
-import { UserInfo as UserInfoInte } from "../shared/sharedInitialState";
+import { UserInfo as UserInfoInte } from "../shared/sharedInitialState"
 
 export interface WithDataProps {
   state: {
@@ -43,14 +43,14 @@ function UserInfo({ location, userInfo, user, onLogout }: UserInfoProps) {
     location.pattern === "/user/:loginname" &&
     userInfo &&
     user &&
-    userInfo.loginname === user.loginname;
+    userInfo.loginname === user.loginname
   return (
     <div className="user-info">
       <User if={!showLogout && !!userInfo} info={userInfo} />
       <Login if={!showLogout && !userInfo} redirect={location.raw} />
       <Logout if={showLogout} onLogout={onLogout} />
     </div>
-  );
+  )
 }
 
 export interface LoginProps {
@@ -60,7 +60,7 @@ export interface LoginProps {
 
 function Login(props: LoginProps) {
   if (!props.if) {
-    return null;
+    return null
   }
 
   return (
@@ -69,7 +69,7 @@ function Login(props: LoginProps) {
         登录
       </Link>
     </ul>
-  );
+  )
 }
 
 export interface LogoutProps {
@@ -79,7 +79,7 @@ export interface LogoutProps {
 
 function Logout(props: LogoutProps) {
   if (!props.if) {
-    return null;
+    return null
   }
 
   return (
@@ -88,7 +88,7 @@ function Logout(props: LogoutProps) {
         退出
       </li>
     </ul>
-  );
+  )
 }
 
 export interface UserProps {
@@ -98,13 +98,13 @@ export interface UserProps {
 
 function User(props: UserProps) {
   if (!props.if) {
-    return null;
+    return null
   }
-  let { loginname, avatar_url } = props.info;
+  let { loginname, avatar_url } = props.info
   return (
     <Link as="div" to={`/user/${loginname}`} className="login-yes">
       <div className="avertar">{avatar_url && <img src={avatar_url} />}</div>
       <div className="info">{loginname && <p>{loginname}</p>}</div>
     </Link>
-  );
+  )
 }

@@ -2,9 +2,9 @@
  * actions of method
  */
 import { Action, ActionWithPayload } from 'react-imvc'
-import { UPDATE_HTML_TITLE } from "../../shared/sharedActions";
-import { ExtraState, UserInfo, Reply, Topic } from "../../shared/sharedInitialState";
-import { markdown } from "markdown";
+import { UPDATE_HTML_TITLE } from "../../shared/sharedActions"
+import { ExtraState, UserInfo, Reply, Topic } from "../../shared/sharedInitialState"
+import { markdown } from "markdown"
 
 export type State = ExtraState & {
   pageTitle: string,
@@ -20,7 +20,7 @@ export const initialState = {
   activeReplyId: null,
   replyOfOthers: {},
   replyOfTopic: ""
-};
+}
 
 /**
  * 
@@ -33,8 +33,8 @@ export const COMPONENT_WILL_CREATE: ActionWithPayload<State, { topic: Topic | nu
   return {
     ...state,
     topic
-  };
-};
+  }
+}
 
 /**
  * 点击其他用户评论下的回复时，
@@ -44,37 +44,37 @@ export const COMPONENT_WILL_CREATE: ActionWithPayload<State, { topic: Topic | nu
  */
 export const TOGGLE_REPLY_FORM: ActionWithPayload<State, { activeReplyId: string }> = (state, { activeReplyId }) => {
   if (activeReplyId === state.activeReplyId) {
-    return HIDE_REPLY_FORM(state);
+    return HIDE_REPLY_FORM(state)
   } else {
-    return SHOW_REPLY_FORM(state, activeReplyId);
+    return SHOW_REPLY_FORM(state, activeReplyId)
   }
-};
+}
 
 export const SHOW_REPLY_FORM: ActionWithPayload<State, string> = (state, activeReplyId) => {
-  let replyOfOthers = state.replyOfOthers;
+  let replyOfOthers = state.replyOfOthers
 
   if (!replyOfOthers[activeReplyId]) {
-    replyOfOthers = { ...replyOfOthers };
-    let replyItem = state.topic && state.topic.replies.find(item => item.id === activeReplyId);
-    replyOfOthers[activeReplyId] = `@${replyItem && replyItem.author.loginname} `;
+    replyOfOthers = { ...replyOfOthers }
+    let replyItem = state.topic && state.topic.replies.find(item => item.id === activeReplyId)
+    replyOfOthers[activeReplyId] = `@${replyItem && replyItem.author.loginname} `
   }
 
   return {
     ...state,
     activeReplyId,
     replyOfOthers
-  };
-};
+  }
+}
 
 export const HIDE_REPLY_FORM: Action<State> = (state) => {
   return {
     ...state,
     activeReplyId: null
-  };
-};
+  }
+}
 
 export const LIKE_REPLY: ActionWithPayload<State, { action: string, replyId: string }> = (state, { action, replyId }) => {
-  let { topic, userInfo } = state;
+  let { topic, userInfo } = state
   let userId: string
   if (userInfo) {
     userId = userInfo.id
@@ -82,56 +82,56 @@ export const LIKE_REPLY: ActionWithPayload<State, { action: string, replyId: str
 
   let replies = topic && topic.replies.map(reply => {
     if (reply.id !== replyId) {
-      return reply;
+      return reply
     }
-    let { ups } = reply;
+    let { ups } = reply
     if (action === "down") {
-      ups = ups.filter(id => id !== userId);
+      ups = ups.filter(id => id !== userId)
     } else if (action === "up") {
-      ups = ups.concat(userId as string);
+      ups = ups.concat(userId as string)
     }
     return {
       ...reply,
       ups
-    };
-  });
+    }
+  })
 
-  topic = { ...topic, replies } as Topic;
+  topic = { ...topic, replies } as Topic
 
   return {
     ...state,
     topic
-  };
-};
+  }
+}
 
 export const REPLY_TO_TOPIC: ActionWithPayload<State, { replyId: string, content: string }> = (state, payload) => {
-  state = ADD_REPLY(state, payload);
+  state = ADD_REPLY(state, payload)
   return {
     ...state,
     replyOfTopic: ""
-  };
-};
+  }
+}
 
 export const REPLY_TO_OTHER: ActionWithPayload<State, { replyId: string, newReplyId: string, content: string }> = (state, { replyId, newReplyId, content }) => {
   state = ADD_REPLY(state, {
     replyId: newReplyId,
     content: content
-  });
+  })
 
   let replyOfOthers = {
     ...state.replyOfOthers,
     [replyId]: ""
-  };
+  }
 
   return {
     ...state,
     replyOfOthers
-  };
-};
+  }
+}
 
 export const ADD_REPLY: ActionWithPayload<State, { replyId: string, content: string }> = (state, { replyId, content }) => {
-  let { userInfo, topic } = state;
-  let replyItem = createReplyItem({ replyId, content, userInfo: userInfo as UserInfo });
+  let { userInfo, topic } = state
+  let replyItem = createReplyItem({ replyId, content, userInfo: userInfo as UserInfo })
 
   topic = {
     ...topic,
@@ -141,11 +141,11 @@ export const ADD_REPLY: ActionWithPayload<State, { replyId: string, content: str
   return {
     ...state,
     topic
-  };
-};
+  }
+}
 
 function createReplyItem({ replyId, content, userInfo }: { replyId: string, content: string, userInfo: UserInfo }): Reply {
-  let create_at = new Date().getTime();
+  let create_at = new Date().getTime()
   return {
     id: replyId,
     author: {
@@ -155,5 +155,5 @@ function createReplyItem({ replyId, content, userInfo }: { replyId: string, cont
     content: markdown.toHTML(content),
     ups: [],
     create_at
-  };
+  }
 }

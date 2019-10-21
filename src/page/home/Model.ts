@@ -27,7 +27,7 @@ export const initialState = {
     tab: "all",
     mdrender: true
   },
-};
+}
 
 /**
  * 在 View 创建前将首屏数据合并到 state 里
@@ -45,10 +45,10 @@ export type ScrollPayload = {
   searchParams: SearchParams
 }
 export const SCROLL_TO_BOTTOM: ActionWithPayload<State, ScrollPayload> = (state, { data, searchParams }) => {
-  state = ADD_TOPICS(state, data);
+  state = ADD_TOPICS(state, data)
   state = UPDATE_SEARCH_PARAMS(state, searchParams)
   return state
-};
+}
 
 
 /**
@@ -69,13 +69,13 @@ export type AddData = {
 }[]
 export const ADD_TOPICS: ActionWithPayload<State, AddData> = (state, data) => {
   let topics = data.map(item => {
-    let { content, ...topic } = item;
-    return topic;
-  });
+    let { content, ...topic } = item
+    return topic
+  })
 
   return {
     ...state,
     topics: state.topics.concat(topics)
-  };
-};
+  }
+}
 

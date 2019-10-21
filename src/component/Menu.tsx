@@ -1,8 +1,8 @@
-import React from "react";
-import classnames from "classnames";
-import { Link } from "react-imvc/component";
-import connect from "react-imvc/hoc/connect";
-import UserInfo from "./UserInfo";
+import React from "react"
+import classnames from "classnames"
+import { Link } from "react-imvc/component"
+import connect from "react-imvc/hoc/connect"
+import UserInfo from "./UserInfo"
 
 export interface WithDataProps {
   state: {
@@ -17,10 +17,10 @@ const withData = connect(({ state, handlers }) => {
   return {
     showMenu: state.showMenu,
     onClose: handlers.handleCloseMenu
-  };
-});
+  }
+})
 
-export default withData(Menu);
+export default withData(Menu)
 
 export interface MenuProps {
   showMenu: boolean,
@@ -31,7 +31,7 @@ function Menu(props: MenuProps) {
   let className = classnames({
     "nav-list": true,
     show: props.showMenu
-  });
+  })
 
   return (
     <section id="sideBar" className={className} onClick={props.onClose}>
@@ -72,7 +72,7 @@ function Menu(props: MenuProps) {
         </MenuItemWithCheck>
       </ul>
     </section>
-  );
+  )
 }
 
 export interface WithCurrentPathProps {
@@ -86,10 +86,10 @@ export interface WithCurrentPathProps {
 const withCurrentPath = connect(({ state }: WithCurrentPathProps) => {
   return {
     current: state.location.raw
-  };
-});
+  }
+})
 
-const MenuItemWithCheck = withCurrentPath(MenuItem);
+const MenuItemWithCheck = withCurrentPath(MenuItem)
 
 export interface MenuItemProps {
   current: string,
@@ -99,10 +99,10 @@ export interface MenuItemProps {
 
 function MenuItem(props: MenuItemProps) {
   if (props.to === props.current) {
-    let { to, current, ...rest } = props;
-    return <li {...rest} />;
+    let { to, current, ...rest } = props
+    return <li {...rest} />
   }
 
-  let { current, ...rest } = props;
-  return <Link as="li" {...rest} />;
+  let { current, ...rest } = props
+  return <Link as="li" {...rest} />
 }

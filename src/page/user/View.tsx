@@ -1,10 +1,10 @@
-import React from "react";
+import React from "react"
 import { ViewProps } from 'react-imvc'
-import classnames from "classnames";
-import { Link } from "react-imvc/component";
-import Layout from "../../component/Layout";
-import { getLastTimeStr } from "../../shared/util";
-import { UserInfo, Message } from "../../shared/sharedInitialState";
+import classnames from "classnames"
+import { Link } from "react-imvc/component"
+import Layout from "../../component/Layout"
+import { getLastTimeStr } from "../../shared/util"
+import { UserInfo, Message } from "../../shared/sharedInitialState"
 import { TYPE, State } from './Model'
 
 export interface Ctrl {
@@ -12,12 +12,12 @@ export interface Ctrl {
 }
 
 export default function View({ state, ctrl }: ViewProps<State, Ctrl>) {
-  let { user, type } = state;
+  let { user, type } = state
   let key = `recent_${type}` as keyof UserInfo
 
   if (!user) return <div></div>
 
-  let currentData = user[key] || [];
+  let currentData = user[key] || []
   return (
     <Layout>
       <UserInfoComponent user={user} />
@@ -27,7 +27,7 @@ export default function View({ state, ctrl }: ViewProps<State, Ctrl>) {
         onChange={ctrl.handleTypeChange}
       />
     </Layout>
-  );
+  )
 }
 
 export interface UserInfoProps {
@@ -45,7 +45,7 @@ function UserInfoComponent({ user }: UserInfoProps) {
         <span className="u-score">积分：{user.score}</span>
       </div>
     </section>
-  );
+  )
 }
 
 export interface UserTopicsProps {
@@ -75,7 +75,7 @@ function UserTopics({ currentData, type, onChange }: UserTopicsProps) {
       </ul>
       <MessageList list={currentData} />
     </section>
-  );
+  )
 }
 
 export interface TabItem {
@@ -89,12 +89,12 @@ function TabItem({ type, selected, children, onChange }: React.PropsWithChildren
     item: true,
     br: true,
     selected
-  });
+  })
   return (
     <li className={className} data-type={type} onClick={onChange}>
       {children}
     </li>
-  );
+  )
 }
 
 export interface MessageListProps {
@@ -105,20 +105,20 @@ function MessageList({ list }: MessageListProps) {
   if (!list || list.length === 0) {
     return (
       <div className="no-data">
-        <i className="iconfont icon-empty">&#xe60a;</i>
+        <i className="iconfont icon-empty">&#xe60a</i>
         暂无数据!
       </div>
-    );
+    )
   }
 
   return (
     <div>{list.map(message => <MessageComponent {...message} key={message.id} />)}</div>
-  );
+  )
 }
 
 
 function MessageComponent(props: Message) {
-  let { id, title, author, last_reply_at } = props;
+  let { id, title, author, last_reply_at } = props
   return (
     <div className="message markdown-body">
       <section className="user">
@@ -139,5 +139,5 @@ function MessageComponent(props: Message) {
         </Link>
       </section>
     </div>
-  );
+  )
 }

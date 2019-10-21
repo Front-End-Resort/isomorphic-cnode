@@ -1,27 +1,27 @@
 import { M2AS } from 'react-imvc'
-import Controller from "../../shared/BaseController";
-import View, { Ctrl } from "./View";
-import * as Model from "./Model";
+import Controller from "../../shared/BaseController"
+import View, { Ctrl } from "./View"
+import * as Model from "./Model"
 
 export default class Add extends Controller<Model.State, M2AS<typeof Model>> implements Ctrl {
-  KeepAlive = true;
-  NeedLogin = true;
-  View = View;
-  Model = Model;
+  KeepAlive = true
+  NeedLogin = true
+  View = View
+  Model = Model
 
   handlePublish = async () => {
-    let state = this.store.getState();
-    let accesstoken = this.cookie("accesstoken");
-    let { title, tab, content } = state;
+    let state = this.store.getState()
+    let accesstoken = this.cookie("accesstoken")
+    let { title, tab, content } = state
 
     if (title.length < 10) {
-      this.showAlert("标题不能少于 10 字");
-      return;
+      this.showAlert("标题不能少于 10 字")
+      return
     }
 
     if (content.length === 0) {
-      this.showAlert("正文不能为空");
-      return;
+      this.showAlert("正文不能为空")
+      return
     }
 
     let params = {
@@ -29,19 +29,19 @@ export default class Add extends Controller<Model.State, M2AS<typeof Model>> imp
       title,
       tab,
       content
-    };
-
-    this.showLoading("发布中……");
-
-    try {
-      let { topic_id } = await this.post("/topics", params);
-      let targetPath = `/topic/${topic_id}`;
-      this.removeFromCache();
-      this.history.replace(targetPath);
-    } catch (error) {
-      this.showAlert(error.message);
     }
 
-    this.hideLoading();
-  };
+    this.showLoading("发布中……")
+
+    try {
+      let { topic_id } = await this.post("/topics", params)
+      let targetPath = `/topic/${topic_id}`
+      this.removeFromCache()
+      this.history.replace(targetPath)
+    } catch (error) {
+      this.showAlert(error.message)
+    }
+
+    this.hideLoading()
+  }
 }

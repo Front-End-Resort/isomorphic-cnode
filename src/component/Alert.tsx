@@ -1,4 +1,4 @@
-import React from "react";
+import React from "react"
 import connect from 'react-imvc/hoc/connect'
 
 export interface WithDataProps {
@@ -21,7 +21,7 @@ export interface Props {
 
 function Alert(props: Props) {
   if (!props.content) {
-    return null;
+    return null
   }
   return (
     <div id="wxAlert" className="wx_loading">
@@ -29,5 +29,5 @@ function Alert(props: Props) {
         {props.content}
       </div>
     </div>
-  );
+  )
 }

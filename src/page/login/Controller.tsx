@@ -1,8 +1,8 @@
-import React from "react";
+import React from "react"
 import { ViewProps } from 'react-imvc'
-import { Input } from "react-imvc/component";
-import Layout from "../../component/Layout";
-import Controller from "../../shared/BaseController";
+import { Input } from "react-imvc/component"
+import Layout from "../../component/Layout"
+import Controller from "../../shared/BaseController"
 import { ExtraState } from '../../shared/sharedInitialState'
 
 export type State = ExtraState & {
@@ -13,7 +13,7 @@ export type State = ExtraState & {
 const initialState = {
   pageTitle: "登录",
   token: ""
-};
+}
 
 class Login extends Controller<State, {}> {
   View = View
@@ -23,41 +23,41 @@ class Login extends Controller<State, {}> {
     let { context, location } = this
     // 如果已经登陆，重定向离开
     if (this.isLogin()) {
-      let { userInfo } = context;
-      let targetPath = (location.query && location.query.redirect as string) || '';
+      let { userInfo } = context
+      let targetPath = (location.query && location.query.redirect as string) || ''
       if (!targetPath) {
-        targetPath = `${context.basename}/user/${userInfo && userInfo.loginname}`;
+        targetPath = `${context.basename}/user/${userInfo && userInfo.loginname}`
       }
-      this.redirect(targetPath);
-      return false;
+      this.redirect(targetPath)
+      return false
     }
   }
 
   handleLogin = async () => {
-    let { token } = this.store.getState();
+    let { token } = this.store.getState()
 
     if (!token || token.length !== 36) {
-      this.showAlert("令牌格式错误, 应为36位UUID字符串");
-      return;
+      this.showAlert("令牌格式错误, 应为36位UUID字符串")
+      return
     }
 
-    this.showLoading("登录中……");
+    this.showLoading("登录中……")
 
     try {
-      let userInfo = await this.fetchUserInfo(token);
+      let userInfo = await this.fetchUserInfo(token)
 
       if (!userInfo) {
-        throw new Error("登陆失败，请重试");
+        throw new Error("登陆失败，请重试")
       }
 
-      this.cookie("accesstoken", token);
-      window.location.reload();
+      this.cookie("accesstoken", token)
+      window.location.reload()
     } catch (error) {
-      this.showAlert(error.message);
+      this.showAlert(error.message)
     }
 
-    this.hideLoading();
-  };
+    this.hideLoading()
+  }
 }
 
 export default Login
@@ -67,7 +67,7 @@ export interface Ctrl {
 }
 
 function View({ ctrl }: ViewProps<State, Ctrl>) {
-  let { handleLogin } = ctrl;
+  let { handleLogin } = ctrl
 
   return (
     <Layout>
@@ -88,5 +88,5 @@ function View({ ctrl }: ViewProps<State, Ctrl>) {
         </div>
       </section>
     </Layout>
-  );
+  )
 }

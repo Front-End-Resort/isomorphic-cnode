@@ -1,17 +1,17 @@
-import Controller from "../../shared/BaseController";
+import Controller from "../../shared/BaseController"
 import { ExtraState } from '../../shared/sharedInitialState'
-import React from "react";
-import Layout from "../../component/Layout";
+import React from "react"
+import Layout from "../../component/Layout"
 
 export type State = ExtraState &  {
   pageTitle: string
 }
 const initialState = {
   pageTitle: "关于"
-};
+}
 
 export default class About extends Controller<State, {}> {
-  View = View;
+  View = View
   initialState = initialState
 }
 
@@ -43,5 +43,5 @@ function View() {
         <dd>V2.0</dd>
       </dl>
     </Layout>
-  );
+  )
 }

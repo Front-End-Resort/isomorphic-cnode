@@ -1,8 +1,8 @@
-import React from "react";
-import classnames from "classnames";
-import { Link } from "react-imvc/component";
+import React from "react"
+import classnames from "classnames"
+import { Link } from "react-imvc/component"
 import connect from 'react-imvc/hoc/connect'
-import Menu from "./Menu";
+import Menu from "./Menu"
 
 export interface WithDataProps {
   state: {
@@ -51,12 +51,12 @@ function Header(props: HeaderProps) {
     pageTitle,
     onCloseMenu,
     onOpenMenu,
-  } = props;
+  } = props
   let headClassName = classnames({
     show: showMenu && fixedHeader,
     "fix-header": fixedHeader,
     "no-fix": !fixedHeader
-  });
+  })
   
   return (
     <div>
@@ -70,7 +70,7 @@ function Header(props: HeaderProps) {
       </header>
       <Menu />
     </div>
-  );
+  )
 }
 
 export interface PageCoverProps {
@@ -80,9 +80,9 @@ export interface PageCoverProps {
 
 function PageCover(props: PageCoverProps) {
   if (!props.if) {
-    return null;
+    return null
   }
-  return <div className="page-cover" onClick={props.onClick} />;
+  return <div className="page-cover" onClick={props.onClick} />
 }
 
 export interface ToolbarProps {
@@ -92,9 +92,9 @@ export interface ToolbarProps {
 
 function Toolbar(props: ToolbarProps) {
   if (!props.if) {
-    return null;
+    return null
   }
-  return <div className="toolbar-nav" onClick={props.onClick} />;
+  return <div className="toolbar-nav" onClick={props.onClick} />
 }
 
 export interface MessageProps {
@@ -104,15 +104,15 @@ export interface MessageProps {
 
 function Message({ messageCount, showAddButton }: MessageProps) {
   if (messageCount > 0) {
-    return <i className="num">{messageCount}</i>;
+    return <i className="num">{messageCount}</i>
   }
   if (showAddButton) {
     return (
       <Link as="i" className="iconfont add-icon" to={`/add`}>
-        &#xe60f;
+        &#xe60f
       </Link>
-    );
+    )
   }
 
-  return null;
+  return null
 }
