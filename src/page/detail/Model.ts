@@ -1,7 +1,7 @@
 /**
  * actions of method
  */
-import { Action, ActionWithPayload } from 'react-imvc'
+import { Action } from 'react-imvc'
 import { UPDATE_HTML_TITLE } from "../../shared/sharedActions"
 import { ExtraState, UserInfo, Reply, Topic } from "../../shared/sharedInitialState"
 import { markdown } from "markdown"
@@ -27,7 +27,7 @@ export const initialState = {
  * 首屏数据为 topic
  */
 export interface ComponentWillCreatePayload { topic: Topic | null }
-export const COMPONENT_WILL_CREATE: ActionWithPayload<State, ComponentWillCreatePayload> = (state, { topic }) => {
+export const COMPONENT_WILL_CREATE: Action<State, ComponentWillCreatePayload> = (state, { topic }) => {
   if (topic) {
     state = UPDATE_HTML_TITLE(state, topic.title)
   }
@@ -44,7 +44,7 @@ export const COMPONENT_WILL_CREATE: ActionWithPayload<State, ComponentWillCreate
  * 如果再次点击，则收起表单
  */
 export interface ToggleReplyFormPayload { activeReplyId: string }
-export const TOGGLE_REPLY_FORM: ActionWithPayload<State, ToggleReplyFormPayload> = (state, { activeReplyId }) => {
+export const TOGGLE_REPLY_FORM: Action<State, ToggleReplyFormPayload> = (state, { activeReplyId }) => {
   if (activeReplyId === state.activeReplyId) {
     return HIDE_REPLY_FORM(state)
   } else {
@@ -52,7 +52,7 @@ export const TOGGLE_REPLY_FORM: ActionWithPayload<State, ToggleReplyFormPayload>
   }
 }
 
-export const SHOW_REPLY_FORM: ActionWithPayload<State, string> = (state, activeReplyId) => {
+export const SHOW_REPLY_FORM: Action<State, string> = (state, activeReplyId) => {
   let replyOfOthers = state.replyOfOthers
 
   if (!replyOfOthers[activeReplyId]) {
@@ -76,7 +76,7 @@ export const HIDE_REPLY_FORM: Action<State> = (state) => {
 }
 
 export interface LikeReplyPayload { action: string, replyId: string }
-export const LIKE_REPLY: ActionWithPayload<State, LikeReplyPayload> = (state, { action, replyId }) => {
+export const LIKE_REPLY: Action<State, LikeReplyPayload> = (state, { action, replyId }) => {
   let { topic, userInfo } = state
   let userId: string
   if (userInfo) {
@@ -108,7 +108,7 @@ export const LIKE_REPLY: ActionWithPayload<State, LikeReplyPayload> = (state, { 
 }
 
 export interface ReplyToTopicPayload { replyId: string, content: string }
-export const REPLY_TO_TOPIC: ActionWithPayload<State, ReplyToTopicPayload> = (state, payload) => {
+export const REPLY_TO_TOPIC: Action<State, ReplyToTopicPayload> = (state, payload) => {
   state = ADD_REPLY(state, payload)
   return {
     ...state,
@@ -117,7 +117,7 @@ export const REPLY_TO_TOPIC: ActionWithPayload<State, ReplyToTopicPayload> = (st
 }
 
 export interface ReplyToOtherPayload { replyId: string, newReplyId: string, content: string }
-export const REPLY_TO_OTHER: ActionWithPayload<State, ReplyToOtherPayload> = (state, { replyId, newReplyId, content }) => {
+export const REPLY_TO_OTHER: Action<State, ReplyToOtherPayload> = (state, { replyId, newReplyId, content }) => {
   state = ADD_REPLY(state, {
     replyId: newReplyId,
     content: content
@@ -135,7 +135,7 @@ export const REPLY_TO_OTHER: ActionWithPayload<State, ReplyToOtherPayload> = (st
 }
 
 export interface AddReplyPayload { replyId: string, content: string }
-export const ADD_REPLY: ActionWithPayload<State, AddReplyPayload> = (state, { replyId, content }) => {
+export const ADD_REPLY: Action<State, AddReplyPayload> = (state, { replyId, content }) => {
   let { userInfo, topic } = state
   let replyItem = createReplyItem({ replyId, content, userInfo: userInfo as UserInfo })
 

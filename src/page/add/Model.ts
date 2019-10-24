@@ -1,4 +1,3 @@
-
 import { ExtraState } from '../../shared/sharedInitialState'
 
 export type State = ExtraState & {

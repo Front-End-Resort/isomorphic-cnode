@@ -2,7 +2,6 @@ import React from "react"
 import classnames from "classnames"
 import { Link, Input } from "react-imvc/component"
 import { useCtrl, useModel, useModelActions } from 'react-imvc/hook'
-import { ViewProps } from 'react-imvc'
 import { purify, staticify } from '../../shared/hoc'
 import * as _ from "../../shared/util"
 import Layout from "../../component/Layout"
@@ -16,7 +15,12 @@ export type Ctrl = {
   handleReplyTopic: (event: React.MouseEvent<HTMLSpanElement, MouseEvent>) => void
 }
 
-export default function View({ state, ctrl }: ViewProps<State, Ctrl>) {
+export type ViewProps = {
+  state: State,
+  ctrl: Ctrl
+}
+
+export default function View({ state, ctrl }: ViewProps) {
   let { isLogin, topic, activeReplyId, replyOfOthers } = state
 
   let ctrl1 = useCtrl()

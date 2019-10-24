@@ -1,11 +1,12 @@
-import { M2AS } from 'react-imvc'
 import Controller from "../../shared/BaseController"
 import { BaseState } from 'react-imvc'
 import * as _ from "../../shared/util"
 import * as Model from "./Model"
 import View from "./View"
 
-export default class Home extends Controller<Model.State, M2AS<typeof Model>> {
+export type Actions = Omit<typeof Model, 'initialState'>
+
+export default class Home extends Controller<Model.State, Actions> {
   KeepAlive = true
   View = View
   Model = Model

@@ -1,7 +1,7 @@
-import { Action, ActionWithPayload } from 'react-imvc'
+import { Action } from 'react-imvc'
 import { ExtraState } from './sharedInitialState'
 
-export const UPDATE_HTML_TITLE: ActionWithPayload<ExtraState, string> = (state, title) => {
+export const UPDATE_HTML_TITLE: Action<ExtraState, string> = (state, title) => {
   let html = {
     ...state.html,
     title
@@ -32,14 +32,14 @@ export const CLOSE_MENU: Action<ExtraState> = (state) => {
   }
 }
 
-export const UPDATE_ALERT_TEXT: ActionWithPayload<ExtraState, string> = (state, alertText) => {
+export const UPDATE_ALERT_TEXT: Action<ExtraState, string> = (state, alertText) => {
   return {
     ...state,
     alertText
   }
 }
 
-export const UPDATE_LOADING_TEXT: ActionWithPayload<ExtraState, string> = (state,  loadingText) => {
+export const UPDATE_LOADING_TEXT: Action<ExtraState, string> = (state,  loadingText) => {
   return {
     ...state,
     loadingText

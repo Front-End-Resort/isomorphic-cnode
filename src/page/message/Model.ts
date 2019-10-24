@@ -1,4 +1,4 @@
-import { ActionWithPayload } from 'react-imvc'
+import { Action } from 'react-imvc'
 import { ExtraState } from '../../shared/sharedInitialState'
 import { MessageInfo } from './View'
 export type TAB = "hasNotRead" | "hasRead"
@@ -17,7 +17,7 @@ export const initialState = {
 }
 
 export interface ComponentWillCreatePayload { hasRead: MessageInfo[], hasNotRead: MessageInfo[] }
-export const COMPONENT_WILL_CREATE: ActionWithPayload<State, ComponentWillCreatePayload> = (state, { hasRead, hasNotRead }) => {
+export const COMPONENT_WILL_CREATE: Action<State, ComponentWillCreatePayload> = (state, { hasRead, hasNotRead }) => {
   let tab: TAB = hasNotRead.length > 0 ? "hasNotRead" : "hasRead"
   state = CHANGE_TAB(state, tab)
   return {
@@ -27,7 +27,7 @@ export const COMPONENT_WILL_CREATE: ActionWithPayload<State, ComponentWillCreate
   }
 }
 
-export const CHANGE_TAB: ActionWithPayload<State, TAB> = (state, tab) => {
+export const CHANGE_TAB: Action<State, TAB> = (state, tab) => {
   return {
     ...state,
     tab

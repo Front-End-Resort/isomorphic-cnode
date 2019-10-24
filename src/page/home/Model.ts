@@ -1,4 +1,4 @@
-import { ActionWithPayload } from 'react-imvc'
+import { Action } from 'react-imvc'
 import { ExtraState } from '../../shared/sharedInitialState'
 /**
  * Model
@@ -32,7 +32,7 @@ export const initialState = {
 /**
  * 在 View 创建前将首屏数据合并到 state 里
  */
-export const COMPONENT_WILL_CREATE: ActionWithPayload<State, AddData> = (state, data) => {
+export const COMPONENT_WILL_CREATE: Action<State, AddData> = (state, data) => {
   return ADD_TOPICS(state, data)
 }
 
@@ -44,7 +44,7 @@ export type ScrollPayload = {
   data: AddData,
   searchParams: SearchParams
 }
-export const SCROLL_TO_BOTTOM: ActionWithPayload<State, ScrollPayload> = (state, { data, searchParams }) => {
+export const SCROLL_TO_BOTTOM: Action<State, ScrollPayload> = (state, { data, searchParams }) => {
   state = ADD_TOPICS(state, data)
   state = UPDATE_SEARCH_PARAMS(state, searchParams)
   return state
@@ -54,7 +54,7 @@ export const SCROLL_TO_BOTTOM: ActionWithPayload<State, ScrollPayload> = (state,
 /**
  * 更新查询参数
  */
-export const UPDATE_SEARCH_PARAMS: ActionWithPayload<State, SearchParams> = (state, searchParams) => {
+export const UPDATE_SEARCH_PARAMS: Action<State, SearchParams> = (state, searchParams) => {
   return {
     ...state,
     searchParams,
@@ -67,7 +67,7 @@ export type AddData = {
   content: string,
   [x: string]: any
 }[]
-export const ADD_TOPICS: ActionWithPayload<State, AddData> = (state, data) => {
+export const ADD_TOPICS: Action<State, AddData> = (state, data) => {
   let topics = data.map(item => {
     let { content, ...topic } = item
     return topic

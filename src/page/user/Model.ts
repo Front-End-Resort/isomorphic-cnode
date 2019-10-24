@@ -2,7 +2,7 @@
  * Model
  */
 import { UPDATE_HTML_TITLE } from '../../shared/sharedActions'
-import { ActionWithPayload } from 'react-imvc'
+import { Action } from 'react-imvc'
 import { ExtraState, UserInfo, Message } from "../../shared/sharedInitialState"
 
 export type TYPE = 'replies' | 'topics'
@@ -22,7 +22,7 @@ export const initialState = {
 }
 
 export interface ComponentWillCreate { user: UserInfo }
-export const COMPONENT_WILL_CREATE: ActionWithPayload<State, ComponentWillCreate> = (state, { user }) => {
+export const COMPONENT_WILL_CREATE: Action<State, ComponentWillCreate> = (state, { user }) => {
   state = UPDATE_HTML_TITLE(state, user.loginname)
   return {
     ...state,
@@ -30,7 +30,7 @@ export const COMPONENT_WILL_CREATE: ActionWithPayload<State, ComponentWillCreate
   }
 }
 
-export const CHANGE_TYPE: ActionWithPayload<State, TYPE>  = (state, type) => {
+export const CHANGE_TYPE: Action<State, TYPE>  = (state, type) => {
   return {
     ...state,
     type
