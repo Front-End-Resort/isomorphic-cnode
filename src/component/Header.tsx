@@ -12,21 +12,21 @@ export interface WithDataProps {
     messageCount: number,
     showAddButton: boolean
   },
-  handlers: {
+  ctrl: {
     handleCloseMenu: Function
     handleOpenMenu: Function
   }
 }
 
-const withData = connect(({ state, handlers }: WithDataProps) => {
+const withData = connect(({ state, ctrl }: WithDataProps) => {
   return {
     fixedHeader: state.fixedHeader,
     showMenu: state.showMenu,
     pageTitle: state.pageTitle,
     messageCount: state.messageCount,
     showAddButton: state.showAddButton,
-    onCloseMenu: handlers.handleCloseMenu,
-    onOpenMenu: handlers.handleOpenMenu,
+    onCloseMenu: ctrl.handleCloseMenu,
+    onOpenMenu: ctrl.handleOpenMenu,
   }
 })
 

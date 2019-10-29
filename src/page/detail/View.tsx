@@ -23,9 +23,9 @@ export type ViewProps = {
 export default function View({ state, ctrl }: ViewProps) {
   let { isLogin, topic, activeReplyId, replyOfOthers } = state
 
-  let ctrl1 = useCtrl()
-  let model = useModel()
-  let actions = useModelActions()
+  let ctrl1 = useCtrl<Ctrl, State, {}>()
+  let model = useModel<State, {}>()
+  let actions = useModelActions<State, {}>()
 
   console.log({ ctrl1, model, actions })
 

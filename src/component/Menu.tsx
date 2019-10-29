@@ -8,15 +8,15 @@ export interface WithDataProps {
   state: {
     showMenu: boolean
   },
-  handlers: {
+  ctrl: {
     handleCloseMenu: (...args: any[]) => void
   }
 }
 
-const withData = connect(({ state, handlers }) => {
+const withData = connect(({ state, ctrl }: WithDataProps) => {
   return {
     showMenu: state.showMenu,
-    onClose: handlers.handleCloseMenu
+    onClose: ctrl.handleCloseMenu
   }
 })
 

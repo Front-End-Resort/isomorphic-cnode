@@ -12,17 +12,17 @@ export interface WithDataProps {
     userInfo: UserInfoInte,
     user: UserInfoInte
   },
-  handlers: {
+  ctrl: {
     handleLogout: (event: React.MouseEvent<HTMLLIElement, MouseEvent>) => void
   }
 }
 
-const withData = connect(({ state, handlers }: WithDataProps) => {
+const withData = connect(({ state, ctrl }: WithDataProps) => {
   return {
     location: state.location,
     userInfo: state.userInfo,
     user: state.user,
-    onLogout: handlers.handleLogout,
+    onLogout: ctrl.handleLogout,
   }
 })
 
