@@ -1,5 +1,4 @@
 import React from "react"
-import { ViewProps } from 'react-imvc'
 import { Input } from "react-imvc/component"
 import Layout from "../../component/Layout"
 import Controller from "../../shared/BaseController"
@@ -66,9 +65,12 @@ export interface Ctrl {
   handleLogin: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void
 }
 
+interface ViewProps {
+  ctrl: Ctrl,
+  state: State
+}
 
-
-function View({ ctrl }: ViewProps<State, Ctrl>) {
+function View({ ctrl }: ViewProps) {
   let { handleLogin } = ctrl
 
   return (
