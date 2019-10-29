@@ -107,7 +107,12 @@ export const LIKE_REPLY: Action<State, LikeReplyPayload> = (state, { action, rep
   }
 }
 
-export interface ReplyToTopicPayload { replyId: string, content: string }
+export interface ReplyToTopicPayload {
+  replyId: string,
+  content: string
+}
+
+
 export const REPLY_TO_TOPIC: Action<State, ReplyToTopicPayload> = (state, payload) => {
   state = ADD_REPLY(state, payload)
   return {

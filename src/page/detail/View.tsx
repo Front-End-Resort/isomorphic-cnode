@@ -6,7 +6,9 @@ import { purify, staticify } from '../../shared/hoc'
 import * as _ from "../../shared/util"
 import Layout from "../../component/Layout"
 import { Reply, Topic } from "../../shared/sharedInitialState"
-import { State } from './Model'
+import * as Model from './Model'
+
+type Actions = Omit<typeof Model, 'initialState'>
 
 export type Ctrl = {
   handleLikeReply: (event: React.MouseEvent<HTMLSpanElement, MouseEvent>) => void
@@ -16,16 +18,16 @@ export type Ctrl = {
 }
 
 export type ViewProps = {
-  state: State,
+  state: Model.State,
   ctrl: Ctrl
 }
 
 export default function View({ state, ctrl }: ViewProps) {
   let { isLogin, topic, activeReplyId, replyOfOthers } = state
 
-  let ctrl1 = useCtrl<Ctrl, State, {}>()
-  let model = useModel<State, {}>()
-  let actions = useModelActions<State, {}>()
+  let ctrl1 = useCtrl<Ctrl, Model.State, Actions>()
+  let model = useModel<Model.State, Actions>()
+  let actions = useModelActions<Model.State, Actions>()
 
   console.log({ ctrl1, model, actions })
 

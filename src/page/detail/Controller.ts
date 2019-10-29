@@ -1,13 +1,13 @@
 import Controller from "../../shared/BaseController"
-import View, { Ctrl } from "./View"
+import View from "./View"
 import * as Model from "./Model"
 import * as _ from "../../shared/util"
 
 const replySuffix = `\n来自 [isomorphic-cnode](https://lucifier129.github.io/isomorphic-cnode/publish/static/)`
 
-export type Actions = Omit<typeof Model, 'initialState'>
+type Actions = Omit<typeof Model, 'initialState'>
 
-class Detail extends Controller<Model.State, Actions> implements Ctrl {
+class Detail extends Controller<Model.State, Actions> {
   KeepAlive = true
   View = View
   Model = Model
