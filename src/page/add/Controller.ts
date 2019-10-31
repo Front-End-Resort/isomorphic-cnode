@@ -1,10 +1,10 @@
 import Controller from "../../shared/BaseController"
-import View, { Ctrl } from "./View"
+import View from "./View"
 import * as Model from "./Model"
 
 type Actions = Omit<typeof Model, 'initialState'>
 
-export default class Add extends Controller<Model.State, Actions> implements Ctrl {
+export default class Add extends Controller<Model.State, Actions> {
   KeepAlive = true
   NeedLogin = true
   View = View

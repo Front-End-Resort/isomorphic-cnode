@@ -7,15 +7,9 @@ import * as _ from "../../shared/util"
 import Layout from "../../component/Layout"
 import { Reply, Topic } from "../../shared/sharedInitialState"
 import * as Model from './Model'
+import Ctrl from './Controller'
 
 type Actions = Omit<typeof Model, 'initialState'>
-
-export type Ctrl = {
-  handleLikeReply: (event: React.MouseEvent<HTMLSpanElement, MouseEvent>) => void
-  handleToggleReplyForm: (event: React.MouseEvent<HTMLSpanElement, MouseEvent>) => void
-  handleReplyOther: (event: React.MouseEvent<HTMLSpanElement, MouseEvent>) => void
-  handleReplyTopic: (event: React.MouseEvent<HTMLSpanElement, MouseEvent>) => void
-}
 
 export type ViewProps = {
   state: Model.State,

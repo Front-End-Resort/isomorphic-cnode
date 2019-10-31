@@ -1,10 +1,7 @@
 import React from "react"
 import { Input } from "react-imvc/component"
 import Layout from "../../component/Layout"
-
-export type Ctrl = {
-  handlePublish: (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => void
-}
+import Ctrl from './Controller'
 
 export type ViewProps = {
   ctrl: Ctrl

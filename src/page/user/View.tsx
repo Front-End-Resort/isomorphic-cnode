@@ -5,10 +5,7 @@ import Layout from "../../component/Layout"
 import { getLastTimeStr } from "../../shared/util"
 import { UserInfo, Message } from "../../shared/sharedInitialState"
 import { TYPE, State } from './Model'
-
-export interface Ctrl {
-  handleTypeChange: (event: React.MouseEvent<HTMLLIElement, MouseEvent>) => void
-}
+import Ctrl from './Controller'
 
 export type ViewProps = {
   state: State,

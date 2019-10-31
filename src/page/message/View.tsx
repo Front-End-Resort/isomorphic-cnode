@@ -4,11 +4,7 @@ import { Link } from "react-imvc/component"
 import Layout from "../../component/Layout"
 import * as _ from '../../shared/util'
 import { State } from './Model'
-
-export interface Ctrl {
-  handleTabChange: (event: React.MouseEvent<HTMLLIElement, MouseEvent>) => void
-  handleMarkAll: (event: React.MouseEvent<HTMLLIElement, MouseEvent>) => void
-}
+import Ctrl from './Controller'
 
 export type ViewProps = {
   state: State,

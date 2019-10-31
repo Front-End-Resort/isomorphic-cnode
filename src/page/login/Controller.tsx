@@ -14,7 +14,7 @@ const initialState = {
   token: ""
 }
 
-class Login extends Controller<State, {}> implements Ctrl {
+class Login extends Controller<State, {}> {
   View = View
   initialState = initialState
 
@@ -61,12 +61,8 @@ class Login extends Controller<State, {}> implements Ctrl {
 
 export default Login
 
-export interface Ctrl {
-  handleLogin: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void
-}
-
 interface ViewProps {
-  ctrl: Ctrl,
+  ctrl: Login,
   state: State
 }
 
