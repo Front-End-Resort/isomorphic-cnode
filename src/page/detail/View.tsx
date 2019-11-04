@@ -19,7 +19,7 @@ export type ViewProps = {
 export default function View({ state, ctrl }: ViewProps) {
   let { isLogin, topic, activeReplyId, replyOfOthers } = state
 
-  let ctrl1 = useCtrl<Ctrl, Model.State, Actions>()
+  let ctrl1 = useCtrl<Ctrl>()
   let model = useModel<Model.State, Actions>()
   let actions = useModelActions<Model.State, Actions>()
 
