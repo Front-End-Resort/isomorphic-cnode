@@ -11,7 +11,7 @@
     "moduleResolution": "node",
     "allowJs": false,
     "noUnusedLocals": true,
-    "strictNullChecks": true,
+    "strict": true,
     "noImplicitAny": true,
     "noImplicitThis": true,
     "resolveJsonModule": true,
