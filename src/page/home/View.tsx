@@ -3,7 +3,7 @@ import { Link } from "react-imvc/component"
 import { purify } from "../../shared/hoc"
 import Layout from "../../component/Layout"
 import * as _ from "../../shared/util"
-import { State } from './Model'
+import type { State } from './Model'
 
 export type ViewProps = {
   state: State

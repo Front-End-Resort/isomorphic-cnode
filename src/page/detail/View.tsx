@@ -5,7 +5,7 @@ import { useCtrl, useModel, useModelActions } from 'react-imvc/hook'
 import { purify, staticify } from '../../shared/hoc'
 import * as _ from "../../shared/util"
 import Layout from "../../component/Layout"
-import { Reply, Topic } from "../../shared/sharedInitialState"
+import type { Reply, Topic } from "../../shared/sharedInitialState"
 import * as Model from './Model'
 import Ctrl from './Controller'
 

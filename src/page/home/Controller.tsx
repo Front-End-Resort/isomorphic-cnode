@@ -1,5 +1,5 @@
 import Controller from "../../shared/BaseController"
-import { BaseState } from 'react-imvc'
+import type { BaseState } from 'react-imvc'
 import * as _ from "../../shared/util"
 import * as Model from "./Model"
 import View from "./View"

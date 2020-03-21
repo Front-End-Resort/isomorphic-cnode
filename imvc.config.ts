@@ -1,5 +1,5 @@
 import path from 'path'
-import { Config } from 'react-imvc'
+import type { Config } from 'react-imvc'
 
 const config: Config = {
 	restapi: 'https://cnodejs.org/api/v1',

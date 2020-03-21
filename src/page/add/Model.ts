@@ -1,4 +1,4 @@
-import { ExtraState } from '../../shared/sharedInitialState'
+import type { ExtraState } from '../../shared/sharedInitialState'
 
 export type State = ExtraState & {
     pageTitle: string,

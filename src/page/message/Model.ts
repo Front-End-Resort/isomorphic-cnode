@@ -1,6 +1,6 @@
-import { Action } from 'react-imvc'
-import { ExtraState } from '../../shared/sharedInitialState'
-import { MessageInfo } from './View'
+import type { Action } from 'react-imvc'
+import type { ExtraState } from '../../shared/sharedInitialState'
+import type { MessageInfo } from './View'
 export type TAB = "hasNotRead" | "hasRead"
 export type State = ExtraState & {
   pageTitle: string,

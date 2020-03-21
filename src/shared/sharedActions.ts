@@ -1,5 +1,5 @@
-import { Action } from 'react-imvc'
-import { ExtraState } from './sharedInitialState'
+import type { Action } from 'react-imvc'
+import type { ExtraState } from './sharedInitialState'
 
 export const UPDATE_HTML_TITLE: Action<ExtraState, string> = (state, title) => {
   let html = {

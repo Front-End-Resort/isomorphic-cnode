@@ -2,7 +2,7 @@ import React from "react"
 import { Input } from "react-imvc/component"
 import Layout from "../../component/Layout"
 import Controller from "../../shared/BaseController"
-import { ExtraState } from '../../shared/sharedInitialState'
+import type { ExtraState } from '../../shared/sharedInitialState'
 
 export type State = ExtraState & {
   pageTitle: string

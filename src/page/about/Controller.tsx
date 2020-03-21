@@ -1,5 +1,5 @@
 import Controller from "../../shared/BaseController"
-import { ExtraState } from '../../shared/sharedInitialState'
+import type { ExtraState } from '../../shared/sharedInitialState'
 import React from "react"
 import Layout from "../../component/Layout"
 

@@ -1,6 +1,6 @@
 // base controller class
 import Controller from "react-imvc/controller"
-import { Actions, BaseState, BaseActions } from 'react-imvc'
+import type { Actions, BaseState, BaseActions } from 'react-imvc'
 import querystring from "querystring"
 import sharedInitialState, { ExtraState } from "./sharedInitialState"
 import * as sharedActions from "./sharedActions"

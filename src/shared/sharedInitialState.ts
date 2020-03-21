@@ -1,7 +1,7 @@
 /**
  * shared initial state
  */
-import { BaseState } from 'react-imvc'
+import type { BaseState } from 'react-imvc'
 export interface Message {
   id: string,
   author: {

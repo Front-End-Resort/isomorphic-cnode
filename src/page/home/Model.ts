@@ -1,5 +1,5 @@
-import { Action } from 'react-imvc'
-import { ExtraState } from '../../shared/sharedInitialState'
+import type { Action } from 'react-imvc'
+import type { ExtraState } from '../../shared/sharedInitialState'
 /**
  * Model
  */

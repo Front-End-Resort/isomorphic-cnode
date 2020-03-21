@@ -2,8 +2,8 @@
  * Model
  */
 import { UPDATE_HTML_TITLE } from '../../shared/sharedActions'
-import { Action } from 'react-imvc'
-import { ExtraState, UserInfo, Message } from "../../shared/sharedInitialState"
+import type { Action } from 'react-imvc'
+import type { ExtraState, UserInfo, Message } from "../../shared/sharedInitialState"
 
 export type TYPE = 'replies' | 'topics'
 

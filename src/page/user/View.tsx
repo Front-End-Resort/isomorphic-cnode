@@ -3,8 +3,8 @@ import classnames from "classnames"
 import { Link } from "react-imvc/component"
 import Layout from "../../component/Layout"
 import { getLastTimeStr } from "../../shared/util"
-import { UserInfo, Message } from "../../shared/sharedInitialState"
-import { TYPE, State } from './Model'
+import type { UserInfo, Message } from "../../shared/sharedInitialState"
+import type { TYPE, State } from './Model'
 import Ctrl from './Controller'
 
 export type ViewProps = {

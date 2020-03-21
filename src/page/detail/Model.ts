@@ -1,9 +1,9 @@
 /**
  * actions of method
  */
-import { Action } from 'react-imvc'
+import type { Action } from 'react-imvc'
 import { UPDATE_HTML_TITLE } from "../../shared/sharedActions"
-import { ExtraState, UserInfo, Reply, Topic } from "../../shared/sharedInitialState"
+import type { ExtraState, UserInfo, Reply, Topic } from "../../shared/sharedInitialState"
 import { markdown } from "markdown"
 
 export type State = ExtraState & {
